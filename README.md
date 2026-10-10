@@ -39,3 +39,7 @@ npm run build    # outputs to /dist (static, deploy anywhere: Vercel, Netlify, G
 - Replace the coded Human Design Academy mockup with real app screens.
 - Add more Emoney and Scallop screens as they're ready.
 - Point the social links in `src/data.js` at the real profiles.
+
+## Hosting
+
+Live at **https://simplr.art**. Every push to `main` builds the site and deploys it to GitHub Pages (`.github/workflows/deploy.yml`). The custom domain is set by `public/CNAME`; DNS for simplr.art lives in GoDaddy (A records to GitHub Pages, `www` CNAME to `geekydhaval.github.io`).
