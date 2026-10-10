@@ -107,12 +107,6 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
 // Crafts: four app-style icons. Each holds a stack of work that peeks out from behind it,
 // and fans out above it on hover / focus / tap.
 {
-  const glyphs = {
-    app: '<rect x="18" y="8" width="28" height="48" rx="7" fill="none" stroke="#fff" stroke-width="4"/><rect x="27" y="13" width="10" height="3" rx="1.5" fill="#fff"/><rect x="25" y="24" width="14" height="14" rx="4" fill="#fff" opacity=".9"/>',
-    web: '<rect x="6" y="12" width="52" height="40" rx="7" fill="none" stroke="#fff" stroke-width="4"/><path d="M6 22h52" stroke="#fff" stroke-width="4"/><circle cx="13" cy="17" r="1.6" fill="#fff"/><circle cx="19" cy="17" r="1.6" fill="#fff"/><rect x="14" y="30" width="20" height="5" rx="2.5" fill="#fff"/><rect x="14" y="39" width="12" height="5" rx="2.5" fill="#fff" opacity=".6"/>',
-    brand: '',
-    motion: '<path d="M8 50 C 24 50, 26 14, 56 14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="56" cy="14" r="6" fill="#fff"/><circle cx="8" cy="50" r="4" fill="#fff" opacity=".6"/>',
-  };
   const n = crafts.length;
   const html = crafts.map((c, ci) => {
     // horizontal nudge so the fans of the outer icons stay inside the frame
@@ -125,15 +119,13 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
       const y = -(phone ? 230 : 205) + Math.abs(k) * Math.abs(k) * 14;
       const r = k * (phone ? 6 : 7);
       // the closed "peek": the first three tuck behind the icon like papers in a folder
-      const peek = i < 3 ? [(i - 1) * 26, -74 - (i === 1 ? 14 : 0), (i - 1) * 12] : [0, 0, 0];
+      const peek = i < 3 ? [(i - 1) * 28, -86 - (i === 1 ? 14 : 0), (i - 1) * 12] : [0, 0, 0];
       const media = it.video
         ? `<video muted loop playsinline preload="none" poster="${cdn}${it.video}-poster-00001.jpg" aria-label="${esc(it.alt)}"><source src="${cdn}${it.video}-transcode.webm" type="video/webm" /><source src="${cdn}${it.video}-transcode.mp4" type="video/mp4" /></video>`
         : `<img src="${it.src}" alt="${esc(it.alt)}" loading="lazy"${it.pos ? ` style="object-position:center ${it.pos}"` : ''} />`;
       return `<figure class="craft__card craft__card--${it.shape}${i < 3 ? ' is-peek' : ''}" style="--x:${x.toFixed(0)}px;--y:${y.toFixed(0)}px;--r:${r}deg;--px:${peek[0]}px;--py:${peek[1]}px;--pr:${peek[2]}deg;--d:${(i * 0.045).toFixed(3)}s">${media}</figure>`;
     }).join('');
-    const icon = c.id === 'brand'
-      ? `<span class="craft__glyph craft__glyph--mark">${mark('badge')}</span>`
-      : `<svg class="craft__glyph" viewBox="0 0 64 64" aria-hidden="true">${glyphs[c.id]}</svg>`;
+    const icon = `<img class="craft__img" src="/work/icon-${c.id}.webp" alt="" width="320" height="320" />`;
     return `<div class="craft__item craft__item--${c.id}">
       <div class="craft__cards" aria-hidden="true">${cards}</div>
       <button class="craft__btn" type="button" aria-expanded="false" aria-label="${esc(c.label)}: show work">
