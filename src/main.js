@@ -6,7 +6,7 @@ import Lenis from 'lenis';
 import { createLineField } from './lines.js';
 import { createAurora } from './aurora.js';
 import { coverFor, avatarFor } from './art.js';
-import { links, clients, services, work, process, plans, onboarding, team, faqs, socials } from './data.js';
+import { links, clients, services, featured, work, process, plans, onboarding, team, faqs, socials } from './data.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +21,7 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>'
    ───────────────────────────────────────────────────────── */
 
 const check = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const markSvg = `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mark"/></svg>`;
+const markSvg = `<svg viewBox="-4 -4 184 258" aria-hidden="true"><use href="#mark"/></svg>`;
 
 // Marquee (duplicated once so the loop is seamless)
 {
@@ -53,16 +53,74 @@ const illustrations = {
       <circle cx="140" cy="200" r="5" fill="#7B5CFF"/><circle cx="160" cy="30" r="5" fill="#7B5CFF"/>
       <circle class="dot" r="9" fill="#DBF130"/>
     </svg>`,
-  brand: `<svg class="ill-brand" viewBox="0 0 420 240" fill="none">
-      <g class="grid" stroke="#F2F2EE"><circle cx="210" cy="120" r="96"/><circle cx="210" cy="120" r="64"/><circle cx="210" cy="120" r="32"/>
-      <line x1="90" y1="120" x2="330" y2="120"/><line x1="210" y1="10" x2="210" y2="230"/><line x1="125" y1="35" x2="295" y2="205"/><line x1="295" y1="35" x2="125" y2="205"/></g>
-      <g class="spin" transform="translate(146 56) scale(1.28)" stroke="#DBF130" stroke-width="5" stroke-linecap="round">
-        <path d="M82.91 31 A38 38 0 0 1 31 82.91"/><path d="M17.09 69 A38 38 0 0 1 69 17.09"/><path d="M76.87 23.13 L66.97 33.03"/><path d="M23.13 76.87 L33.03 66.97"/>
-      </g>
-      <text x="34" y="226" fill="rgba(242,242,238,.4)" font-size="12" font-family="Sofia Pro, Outfit Variable, sans-serif">#DBF130</text>
-      <rect x="350" y="200" width="36" height="24" rx="6" fill="#DBF130"/><rect x="306" y="200" width="36" height="24" rx="6" fill="#7B5CFF"/>
-    </svg>`,
+  brand: (() => {
+    // The Simple mark, scattered. Hover the card and every line falls into place.
+    let l = '';
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++) {
+      const centre = (c === 1 || c === 2) && (r === 2 || r === 3);
+      const x2 = 34 + 47 * c, y2 = 43 * r, x1 = centre ? 53 + 47 * (c - 1) : 9 + 47 * c, y1 = y2 + (centre ? 27 : 24);
+      const rot = Math.round((Math.sin(r * 7.3 + c * 3.1) * 0.5 + 0.5) * 140 - 70);
+      l += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="--r:${rot}deg" stroke="${centre ? '#DBF130' : '#F2F2EE'}" stroke-opacity="${centre ? 1 : 0.55}"/>`;
+    }
+    return `<svg class="ill-brand" viewBox="0 0 420 260" fill="none">
+      <g class="grid" stroke="#F2F2EE"><rect x="122" y="14" width="176" height="232" rx="2"/><line x1="122" y1="130" x2="298" y2="130"/><line x1="210" y1="14" x2="210" y2="246"/><circle cx="210" cy="130" r="88"/></g>
+      <g transform="translate(122 14) scale(1 .93)" stroke-width="4.5" stroke-linecap="round">${l}</g>
+      <rect x="338" y="214" width="34" height="22" rx="6" fill="#DBF130"/><rect x="298" y="214" width="34" height="22" rx="6" fill="#F2F2EE"/><rect x="378" y="214" width="34" height="22" rx="6" fill="#7B5CFF"/>
+    </svg>`;
+  })(),
 };
+
+// Coded mockup of the HDA academy app (habit-tracker home). Swap for real screens when ready.
+const hdaMock = () => `
+  <div class="phone" aria-label="Human Design Academy app home screen mockup" role="img">
+    <div class="phone__screen hda">
+      <div class="hda__status"><span>9:41</span><span class="hda__island"></span><span>●●● ▮</span></div>
+      <p class="hda__hi">Good morning,</p>
+      <p class="hda__name">Aarav</p>
+      <div class="hda__streak">
+        <svg class="hda__ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" stroke="rgba(242,242,238,.12)" stroke-width="10" fill="none"/><circle class="hda__ring-fill" cx="60" cy="60" r="50" stroke="#F2F2EE" stroke-width="10" fill="none" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 60 60)"/></svg>
+        <div class="hda__streak-text"><strong>12</strong><span>day streak</span></div>
+        <svg class="hda__scribble" viewBox="0 0 200 120" aria-hidden="true"><path class="hda__scribble-path" d="M24 64 C 20 20, 120 6, 170 34 C 205 56, 176 104, 104 110 C 40 116, 6 90, 22 58 C 30 42, 60 30, 90 28" fill="none" stroke="#FF3B30" stroke-width="4" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+      </div>
+      <div class="hda__week">${['M','T','W','T','F','S','S'].map((d, i) => `<span class="${i < 5 ? 'is-done' : i === 5 ? 'is-today' : ''}"><i></i>${d}</span>`).join('')}</div>
+      <p class="hda__label">Today</p>
+      <ul class="hda__list">
+        <li class="is-done"><b></b><div><strong>Prompt engineering</strong><span>Week 1 · 12 min</span></div></li>
+        <li class="is-now"><b></b><div><strong>Make your first AI video</strong><span>Week 2 · 18 min</span></div></li>
+        <li><b></b><div><strong>Build an AI agent</strong><span>Week 3 · locked</span></div></li>
+      </ul>
+      <div class="hda__tabs"><span class="is-on"></span><span></span><span></span><span></span></div>
+    </div>
+  </div>`;
+
+const caseMedia = (c) => {
+  if (c.media === 'site') {
+    return `<div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span>${esc(c.url.replace('https://', ''))}</span></div>
+      <div class="browser__view"><img src="${c.image}" alt="${esc(c.name)} landing page" loading="lazy" /></div></div>`;
+  }
+  if (c.media === 'hda') return hdaMock();
+  return `<img class="case__img" src="${c.image}" alt="${esc(c.name)} by Simple" loading="lazy" />`;
+};
+
+$('[data-featured]').innerHTML = featured
+  .map(
+    (c, i) => `
+  <article class="case case--${c.media}" style="--accent:${c.accent}; --i:${i}">
+    <div class="case__info">
+      <div class="case__top">
+        <ul class="case__tags"><li>${esc(c.kind)}</li><li>${esc(c.industry)}</li>${c.status ? `<li class="is-status">${esc(c.status)}</li>` : ''}</ul>
+        <h3 class="case__name">${esc(c.name)}</h3>
+        <p class="case__body">${esc(c.body)}</p>
+      </div>
+      <div class="case__bottom">
+        <ul class="case__services">${c.services.map((sv) => `<li>${esc(sv)}</li>`).join('')}</ul>
+        ${c.url ? `<a class="btn btn--ghost magnetic" href="${c.url}" target="_blank" rel="noopener" data-cursor="Visit">${esc(c.linkLabel || 'Visit')}</a>` : `<span class="case__soon">${c.client === 'Human Design Academy' ? 'Coming to the App Store' : 'Launching soon'}</span>`}
+      </div>
+    </div>
+    <div class="case__media" ${c.url ? 'data-cursor="Visit"' : ''}>${caseMedia(c)}</div>
+  </article>`
+  )
+  .join('');
 
 $('[data-services]').innerHTML =
   services
@@ -147,7 +205,7 @@ $$('a[href^="#"]').forEach((a) =>
     if (id !== '#top' && !target) return;
     e.preventDefault();
     closeMenu();
-    if (lenis) lenis.scrollTo(target, { offset: id === '#work' ? 0 : -40 });
+    if (lenis) lenis.scrollTo(target, { offset: id === '#lab' ? 0 : -40 });
     else window.scrollTo({ top: id === '#top' ? 0 : target.offsetTop - 40 });
   })
 );
@@ -218,8 +276,7 @@ if (reduced) {
   tl.to(field, { order: 1, duration: 2.6, ease: 'expo.inOut' }, 0)
     .to(aurora || {}, { intensity: 1, duration: 3, ease: 'power2.inOut' }, 0.4)
     .from(chars, { yPercent: 115, rotate: 6, duration: 1.4, stagger: 0.035, ease: 'expo.out' }, 0.75)
-    .from('.hero__mark', { rotate: -220, scale: 0.4, opacity: 0, duration: 1.8, ease: 'expo.out' }, 0.9)
-    .fromTo('.hero__mark .mark__arc', { strokeDashoffset: 160 }, { strokeDashoffset: 0, duration: 1.6, ease: 'expo.inOut' }, 0.9)
+    .fromTo('.hm-line', { strokeDasharray: 40, strokeDashoffset: 40 }, { strokeDashoffset: 0, duration: 1.2, stagger: { each: 0.035, from: 'random' }, ease: 'expo.out' }, 0.9)
     .from('[data-hero-fade]', { y: 24, opacity: 0, duration: 1.1, stagger: 0.09, ease: 'expo.out' }, 1.5)
     .call(() => nav.classList.remove('is-pre'), null, 1.4);
 
@@ -261,7 +318,48 @@ if (reduced) {
 }
 
 /* ─────────────────────────────────────────────────────────
-   Work: horizontal scroll, pinned (desktop)
+   Selected work: cards stack like a deck. While a card is held,
+   its screenshot scrolls / its render breathes.
+   ───────────────────────────────────────────────────────── */
+
+const cases = $$('.case');
+ScrollTrigger.matchMedia({
+  '(min-width: 901px)': () => {
+    if (reduced) return;
+    cases.forEach((c, i) => {
+      const next = cases[i + 1];
+      const hold = next ? { trigger: next, start: 'top bottom', end: 'top 15%', scrub: true } : { trigger: c, start: 'top 70%', end: 'bottom bottom', scrub: true };
+      if (next) gsap.to(c, { scale: 0.93, '--dim': 0.6, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 15%', scrub: true } });
+      const img = $('.browser__view img', c);
+      if (img) gsap.fromTo(img, { y: 0 }, { y: () => -(img.offsetHeight - img.parentElement.offsetHeight), ease: 'none', scrollTrigger: { ...hold, invalidateOnRefresh: true } });
+      const still = $('.case__img', c);
+      if (still) gsap.fromTo(still, { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: next ? 'top 15%' : 'top top', scrub: true } });
+    });
+  },
+  '(max-width: 900px)': () => {
+    if (reduced) return;
+    $$('.browser__view img').forEach((img) =>
+      gsap.fromTo(img, { y: 0 }, { y: () => -(img.offsetHeight - img.parentElement.offsetHeight), ease: 'none', scrollTrigger: { trigger: img.closest('.case'), start: 'top 60%', end: 'bottom 20%', scrub: true, invalidateOnRefresh: true } })
+    );
+  },
+});
+
+// HDA mockup: streak ring fills and the red scribble draws when it comes into view.
+{
+  const hdaEl = $('.hda');
+  if (hdaEl) {
+    const play = () => {
+      if (reduced) { hdaEl.classList.add('is-in'); return; }
+      gsap.to('.hda__ring-fill', { strokeDashoffset: 18, duration: 1.8, ease: 'expo.out' });
+      gsap.to('.hda__scribble-path', { strokeDashoffset: 0, duration: 1.1, delay: 0.7, ease: 'power2.inOut' });
+      gsap.from('.hda__list li', { x: 24, opacity: 0, duration: 0.9, stagger: 0.12, delay: 0.3, ease: 'expo.out' });
+    };
+    ScrollTrigger.create({ trigger: hdaEl, start: 'top 75%', once: true, onEnter: play });
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Lab: horizontal scroll, pinned (desktop)
    ───────────────────────────────────────────────────────── */
 
 ScrollTrigger.matchMedia({

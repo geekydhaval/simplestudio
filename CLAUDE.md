@@ -10,7 +10,7 @@ Simple Studio's landing page. Vanilla JS + Vite, GSAP/ScrollTrigger, Lenis, raw 
 - `npm run build` — static build to `dist/`
 
 ## Where things live
-- Content: `src/data.js` (edit copy here, not in `main.js`)
+- Content: `src/data.js` (edit copy here, not in `main.js`). `featured` = selected case studies (the main event), `work` = the lab.
 - Static copy: `index.html` (hero, headings, CTA, footer)
 - Motion/interaction: `src/main.js`
 - Signature line field: `src/lines.js`; hero light: `src/aurora.js`; generated covers/avatars: `src/art.js`
@@ -25,7 +25,12 @@ Simple Studio's landing page. Vanilla JS + Vite, GSAP/ScrollTrigger, Lenis, raw 
 - The line field is the one bold element. Keep other sections quiet; motion should answer scroll or the cursor, not decorate.
 - Always respect `prefers-reduced-motion`. Test at 390px wide; no horizontal page scroll.
 
+## Brand
+- Logo mark = 4×6 grid of diagonal lines with gradient strokes; the centre four are brighter and longer. Geometry: col x = 9+47c → 34+47c, row y = 43r+24 → 43r (viewBox -4 -4 184 258). Lockup text: "Simple / Design".
+- The hero line field is the logo, exploded. Keep that relationship.
+
 ## Gotchas
 - Don't put CSS `transition` on `transform` for elements GSAP animates (it fights GSAP). The nav intro uses a CSS class for this reason.
 - After content changes that affect height, `ScrollTrigger.refresh()` runs on font load and window load; call it again if you add async content.
-- `<use href="#mark">` can't be targeted by CSS/GSAP; inline the paths if you need to animate parts of the logo.
+- `<use href="#mark">` can't be targeted by CSS/GSAP, and gradient `currentColor` resolves inside the symbol; inline the SVG (as the nav and hero do) when you need different colours or animation.
+- Case cards are `position: sticky` on desktop. Scroll-linked effects use the *next* card as the trigger, not the sticky card itself.

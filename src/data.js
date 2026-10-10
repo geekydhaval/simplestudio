@@ -10,7 +10,7 @@ export const links = {
     'https://www.figma.com/proto/169BrrGqY3I61NtGmzjubi/Simple-Prototype?page-id=3%3A36&node-id=5%3A37&viewport=444%2C48%2C0.22&scaling=min-zoom&starting-point-node-id=5%3A37',
 };
 
-export const clients = ['Iconscout', 'Timeswape', 'ScallopX', 'Scallop', 'Metahome', 'Xlab', 'Paircode', 'pfpverse'];
+export const clients = ['Scallop', 'E Money Network', 'Human Design Academy', 'Iconscout', 'Timeswape', 'Metahome', 'Xlab', 'Paircode'];
 
 export const services = [
   {
@@ -33,6 +33,65 @@ export const services = [
   },
 ];
 
+// Selected work — the headline case studies. `media` picks the presentation:
+//   'site'  → a browser frame whose tall screenshot scrolls as you scroll
+//   'image' → a full-bleed image
+//   'hda'   → the coded Human Design Academy app mockup (swap for real screens later)
+export const featured = [
+  {
+    name: 'scallopx.com',
+    client: 'Scallop',
+    kind: 'Website',
+    industry: 'Fintech',
+    body: 'The landing page for Scallop, a regulated platform bridging crypto and banking. One account, any currency, anywhere: a money story told in one glance, with hand-drawn notes that make finance feel human.',
+    services: ['Landing page', 'Web design', 'Illustration'],
+    url: 'https://scallopx.com',
+    linkLabel: 'Visit scallopx.com',
+    media: 'site',
+    image: '/work/scallopx-site.webp',
+    accent: '#2E38F9',
+  },
+  {
+    name: 'Scallop App',
+    client: 'Scallop',
+    kind: 'Mobile app',
+    industry: 'Fintech',
+    body: 'Fiat, stablecoins and crypto in one balance. Deposit, send and swap sit a thumb away, and physical, virtual and Metal cards live in one place. Banking that finally works across borders.',
+    services: ['Product design', 'UI/UX', 'Design system'],
+    url: 'https://scallopx.com',
+    linkLabel: 'See it live',
+    media: 'image',
+    image: '/work/scallop-app.webp',
+    accent: '#1FA2FF',
+  },
+  {
+    name: 'E Money Network',
+    client: 'E Money Network',
+    kind: 'Website',
+    industry: '3D & motion',
+    body: 'A landing page and a 3D world for E Money Network. Glass, glow and money moving through a living network, so the product is understood before a single word is read.',
+    services: ['Landing page', '3D design', 'Motion'],
+    status: 'In progress',
+    url: '',
+    media: 'image',
+    image: '/work/emoney-3d.webp',
+    accent: '#2B5BFF',
+  },
+  {
+    name: 'Human Design Academy',
+    client: 'Human Design Academy',
+    kind: 'Mobile app',
+    industry: 'Education',
+    body: "The academy app for HDA's students. Daily habits, lessons and streaks in one calm home screen, brought to life with Rive-style animations. Built in React Native.",
+    services: ['Product design', 'Rive animation', 'React Native'],
+    url: '',
+    media: 'hda',
+    image: '',
+    accent: '#FF3B30',
+  },
+];
+
+// The lab: products and experiments we built ourselves.
 // `art` picks a generative cover from src/art.js.
 // Drop a real screenshot into /public/work and set `image` to use it instead.
 export const work = [
