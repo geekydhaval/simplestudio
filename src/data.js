@@ -25,7 +25,7 @@ export const heroDesigns = [
   { file: '68a91b052a9a950ff388ef58_scallopx.png', alt: 'Scallop app screens' },
 ];
 
-export const clients = ['Scallop', 'E Money Network', 'Human Design Academy', 'Iconscout', 'Timeswape', 'Metahome', 'Xlab', 'Paircode'];
+export const clients = ['Scallop', 'E Money Network', 'Human Design Academy', 'CLIS', 'Iconscout', 'Timeswape', 'Metahome', 'Xlab', 'Paircode'];
 
 export const services = [
   {
@@ -99,6 +99,21 @@ export const featured = [
     media: 'image',
     image: '/work/emoney-hero.webp',
     accent: '#2B5BFF',
+  },
+  {
+    name: 'CLIS',
+    client: 'CLIS — Creating Life In Spaces',
+    kind: 'Website',
+    industry: 'Interior design',
+    body: 'The website for CLIS, an interior design studio in Surat. Full-bleed project stories, an editorial serif voice, and the founder\'s story told chapter by chapter.',
+    services: ['Web design', 'Development', 'Art direction'],
+    url: 'https://clis.work',
+    linkLabel: 'Visit clis.work',
+    cta: true,
+    layout: 'wide',
+    media: 'image',
+    image: '/work/clis-site.webp',
+    accent: '#c9a26b',
   },
   {
     name: 'Human Design Academy',
