@@ -104,6 +104,32 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
   fill('[data-icons]', icons.map((i) => `<li style="--c:${i.c}" title="${i.label}"><svg viewBox="0 0 20 20" aria-label="${i.label}">${i.svg}</svg></li>`).join(''));
 }
 
+// Glow icons for the crafts: dark glass tile, bold white glyph that melts into the craft's colour,
+// a coloured glow rising from the bottom edge and a notification badge with the number of pieces.
+const glyphs = {
+  // phone with a 2×2 app grid
+  app: `<rect x="18" y="5" width="28" height="54" rx="7" class="s"/><path d="M28 50h8" class="s"/>
+    <rect x="25" y="14" width="6" height="6" rx="1.5"/><rect x="33" y="14" width="6" height="6" rx="1.5"/>
+    <rect x="25" y="22" width="6" height="6" rx="1.5"/><rect x="33" y="22" width="6" height="6" rx="1.5"/>`,
+  // browser window with a cursor
+  web: `<rect x="5" y="9" width="54" height="44" rx="7" class="s"/><path d="M5 22h54" class="s"/>
+    <circle cx="13.5" cy="15.5" r="2.2"/><circle cx="20.5" cy="15.5" r="2.2"/>
+    <path d="M30 28v20l5.2-5 4.2 8.6 4.6-2.2-4.2-8.4H47z"/>`,
+  // vector pen tool
+  brand: `<path d="M32 5l16 28-6 13H22l-6-13z" class="s"/><path d="M32 5v19" class="s"/>
+    <circle cx="32" cy="29" r="4.2"/><rect x="21" y="51" width="22" height="8" rx="2"/>`,
+  // play button with speed lines
+  motion: `<path d="M26 13l26 19-26 19z" class="s"/><path d="M5 22h11M2 32h14M5 42h11" class="s"/>`,
+};
+const glowIcon = (id, count) => `<span class="gi">
+    <svg class="gi__grid" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20"/><circle cx="32" cy="32" r="28"/><path d="M0 16h64M0 48h64M16 0v64M48 0v64"/></svg>
+    <svg class="gi__glyph" viewBox="0 0 64 64" aria-hidden="true">
+      <defs><linearGradient id="gi-${id}" x1="0" y1="4" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+        <stop offset="0.4" stop-color="#fff"/><stop offset="1" style="stop-color:var(--glow)"/></linearGradient></defs>
+      <g fill="url(#gi-${id})" stroke="url(#gi-${id})">${glyphs[id]}</g>
+    </svg>
+  </span><span class="gi__badge" aria-hidden="true">${count}</span>`;
+
 // Crafts: four app-style icons. Each holds a stack of work that peeks out from behind it,
 // and fans out above it on hover / focus / tap.
 {
@@ -125,7 +151,7 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
         : `<img src="${it.src}" alt="${esc(it.alt)}" loading="lazy"${it.pos ? ` style="object-position:center ${it.pos}"` : ''} />`;
       return `<figure class="craft__card craft__card--${it.shape}${i < 3 ? ' is-peek' : ''}" style="--x:${x.toFixed(0)}px;--y:${y.toFixed(0)}px;--r:${r}deg;--px:${peek[0]}px;--py:${peek[1]}px;--pr:${peek[2]}deg;--d:${(i * 0.045).toFixed(3)}s">${media}</figure>`;
     }).join('');
-    const icon = `<img class="craft__img" src="/work/icon-${c.id}.webp" alt="" width="320" height="320" />`;
+    const icon = glowIcon(c.id, c.items.length);
     return `<div class="craft__item craft__item--${c.id}">
       <div class="craft__cards" aria-hidden="true">${cards}</div>
       <button class="craft__btn" type="button" aria-expanded="false" aria-label="${esc(c.label)}: show work">

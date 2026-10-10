@@ -292,15 +292,45 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .craft__item { position: relative; display: flex; justify-content: center; padding-bottom: 8px; }
 .craft__item.is-open { z-index: 5; }
 .craft__btn { position: relative; z-index: 2; display: grid; justify-items: center; gap: 14px; padding: 6px; border-radius: 34px; }
-.craft__icon { width: 140px; height: 140px; display: grid; place-items: center; position: relative;
-  filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.7)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+.craft__item--app { --glow: #8b5cff; }
+.craft__item--web { --glow: #2f7bff; }
+.craft__item--brand { --glow: #dbf130; }
+.craft__item--motion { --glow: #ff2fa8; }
+.craft__icon { width: 140px; height: 140px; position: relative; display: block;
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s, opacity 0.4s; }
-.craft__img { width: 100%; height: 100%; display: block; }
+/* coloured light spilling onto the page under the tile */
+.craft__icon::before { content: ''; position: absolute; left: -20%; right: -20%; top: 45%; bottom: -45%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--glow) 55%, transparent), transparent);
+  filter: blur(18px); opacity: 0.55; transition: opacity 0.5s, transform 0.6s; }
+.gi { position: absolute; inset: 0; overflow: hidden; border-radius: 31%/31%; isolation: isolate;
+  background:
+    radial-gradient(100% 62% at 50% 112%, color-mix(in srgb, var(--glow) 92%, #fff 8%) 0%, color-mix(in srgb, var(--glow) 45%, transparent) 42%, transparent 72%),
+    linear-gradient(180deg, #121216 0%, #060608 60%, #08080b 100%);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 -1.5px 0 color-mix(in srgb, var(--glow) 60%, #fff 40%), inset 0 -14px 24px -12px color-mix(in srgb, var(--glow) 80%, #fff 20%),
+    0 24px 40px -18px #000, 0 14px 40px -16px color-mix(in srgb, var(--glow) 70%, transparent); }
+/* glassy top sheen */
+.gi::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 38%); }
+.gi__grid { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgba(255, 255, 255, 0.06); stroke-width: 0.35; }
+.gi__glyph { position: absolute; inset: 22%; width: 56%; height: 56%; overflow: visible;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--glow) 45%, transparent)); transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.gi__glyph g > :not(.s) { stroke: none; }
+.gi__glyph .s { fill: none; stroke-width: 6; stroke-linejoin: round; stroke-linecap: round; }
+.gi__badge { position: absolute; top: -12px; right: -12px; z-index: 2; min-width: 40px; height: 40px; padding: 0 10px; border-radius: 999px;
+  display: grid; place-items: center; font: 500 1.25rem/1 var(--body); color: #fff;
+  background: radial-gradient(120% 120% at 35% 25%, #ff4d63, #f0002c 55%, #c80024);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 0 3px #0f0f0f, 0 8px 24px -4px rgba(255, 20, 60, 0.6);
+  transition: transform 0.5s cubic-bezier(0.34, 1.8, 0.64, 1); }
+.craft__item.is-open .craft__icon::before { opacity: 1; transform: scale(1.15); }
+.craft__item.is-open .gi__glyph { transform: translateY(-2px) scale(1.06); }
+.craft__item.is-open .gi__badge { transform: scale(1.15); }
 .craft__label { padding: 6px 12px; border-radius: 999px; font-size: 0.875rem; color: #d6d6d6; background: #1a1a1a; box-shadow: inset 0 0 0 1px #2a2a2a; transition: color 0.3s, background 0.3s, opacity 0.4s; }
 .craft__item.is-open .craft__icon { transform: translateY(-6px) scale(1.08) rotate(-4deg); }
 .craft__item.is-open .craft__label { color: #111; background: var(--lime); }
 .craft__stage:has(.is-open) .craft__item:not(.is-open) .craft__icon, .craft__stage:has(.is-open) .craft__item:not(.is-open) .craft__label { opacity: 0.35; }
-.craft__stage:has(.is-open) .craft__item:not(.is-open) .craft__icon { filter: saturate(0.4) drop-shadow(0 22px 26px rgba(0, 0, 0, 0.7)); }
+.craft__stage:has(.is-open) .craft__item:not(.is-open) .craft__icon { filter: saturate(0.35); }
 
 .craft__cards { position: absolute; left: 50%; top: calc(100% - 126px); width: 0; height: 0; z-index: 1; pointer-events: none; }
 .craft__card { position: absolute; left: 0; top: 0; margin: 0; overflow: hidden; border-radius: 14px; background: #151515;
@@ -321,6 +351,7 @@ main, .footer, .nav { position: relative; z-index: 1; }
 @media (max-width: 760px) {
   .craft__stage { height: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 0; padding-top: 2.5rem; }
   .craft__icon { width: 104px; height: 104px; }
+  .gi__badge { min-width: 32px; height: 32px; font-size: 1rem; top: -9px; right: -9px; }
   .craft__cards { display: none; }
   .craft__arrow { display: none; }
   .craft__tray.is-filled { display: flex; gap: 10px; overflow-x: auto; padding: 1.5rem 0 0.5rem; scroll-snap-type: x mandatory; }

@@ -23,7 +23,7 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - Service videos play only while on screen (IntersectionObserver) and speed up on hover.
 
 ## Crafts (under the hero)
-- Four app-style icons (App, Website, Brand, Motion) from `crafts` in `src/data.js`. Each holds a stack of work that peeks out from behind it and fans out in an arc on hover/focus (CSS transitions driven by `.is-open`; positions are `--x/--y/--r` set in `main.js`). On touch screens a tap opens the work in a horizontal tray under the icons. On desktop the four open once in turn when the section first comes into view, until the visitor hovers.
+- Four glow icons (App, Website, Brand, Motion) from `crafts` in `src/data.js`, drawn in code by `glowIcon()` in `main.js`: dark glass tile, white SVG glyph fading into the craft colour, a bottom glow in `--glow` (set per `.craft__item--{id}`), and a red badge with the number of pieces. Each holds a stack of work that peeks out from behind it and fans out in an arc on hover/focus (CSS transitions driven by `.is-open`; positions are `--x/--y/--r` set in `main.js`). On touch screens a tap opens the work in a horizontal tray under the icons. On desktop the four open once in turn when the section first comes into view, until the visitor hovers.
 - Motion cards are 3D render videos that only play while their craft is open.
 
 ## Design rules (keep these)
