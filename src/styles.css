@@ -281,16 +281,14 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .tile--phone:hover .tile__phone img { transform: translateY(-46%); }
 
 /* Hero wall */
-.wall { position: relative; z-index: 1; display: grid; gap: 14px; padding: 0 0 clamp(2.5rem, 5vw, 3.5rem); overflow: hidden; perspective: 1400px;
+.wall { position: relative; z-index: 1; display: grid; gap: 14px; padding: 0 0 clamp(2.5rem, 5vw, 3.5rem); overflow: hidden; 
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-.wall__row { transform: rotateX(14deg) rotateZ(-3deg); transform-origin: center top; }
 .wall__track { display: flex; gap: 14px; width: max-content; padding: 10px 7px; animation: marquee 60s linear infinite; }
-.wall__row--rev .wall__track { animation-direction: reverse; animation-duration: 70s; }
 .wall:hover .wall__track { animation-play-state: paused; }
 .wall__card { margin: 0; flex: none; width: clamp(180px, 20vw, 290px); aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #161616;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 24px 50px -24px rgba(0, 0, 0, 0.9); transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), filter 0.6s; filter: saturate(0.85) brightness(0.88); }
 .wall__card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-.wall__card:hover { transform: translateY(-14px) scale(1.06) rotate(-1deg); filter: none; box-shadow: 0 0 0 2px var(--lime), 0 40px 70px -24px rgba(0, 0, 0, 0.95); z-index: 2; }
+.wall__card:hover { transform: translateY(-10px) scale(1.04); filter: none; box-shadow: 0 0 0 2px var(--lime), 0 40px 70px -24px rgba(0, 0, 0, 0.95); z-index: 2; }
 .wall__card:hover img { transform: scale(1.08); }
 
 /* Service 3D renders */
