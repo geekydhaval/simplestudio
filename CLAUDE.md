@@ -39,3 +39,6 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - The scallopx tile scrolls its tall screenshot on hover using `--scroll`, computed after the image loads.
 - `--a` is a registered `@property` (angle) used by the glow card. Never reuse `--a` for anything else; the HDA fan uses `--i` / `--ia`.
 - `[data-tilt]` cards are tilted by GSAP on pointer move; don't add CSS transform transitions to those elements.
+
+## Social preview
+- `public/og.png` (1200×630) is rendered from `og/og.html` with Playwright: `python3 og/render.py`. Edit the HTML and re-render when the headline or work changes.
