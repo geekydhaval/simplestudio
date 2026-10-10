@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { createLineField } from './lines.js';
 import { coverFor, avatarFor } from './art.js';
-import { clients, services, featured, work, plans, onboarding, team, faqs, socials } from './data.js';
+import { cdn, heroDesigns, clients, services, featured, work, plans, onboarding, team, faqs, socials } from './data.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,6 +102,14 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
   fill('[data-icons]', icons.map((i) => `<li style="--c:${i.c}" title="${i.label}"><svg viewBox="0 0 20 20" aria-label="${i.label}">${i.svg}</svg></li>`).join(''));
 }
 
+// Hero wall: two rows of designs drifting in opposite directions
+{
+  const half = Math.ceil(heroDesigns.length / 2);
+  const card = (d, hide) => `<figure class="wall__card"${hide ? ' aria-hidden="true"' : ''}><img src="${cdn}${d.file}" alt="${hide ? '' : esc(d.alt)}" loading="lazy" /></figure>`;
+  const row = (list, rev) => `<div class="wall__row${rev ? ' wall__row--rev' : ''}"><div class="wall__track">${list.map((d) => card(d)).join('')}${list.map((d) => card(d, true)).join('')}</div></div>`;
+  fill('[data-wall]', row(heroDesigns.slice(0, half)) + row(heroDesigns.slice(half), true));
+}
+
 // Clients marquee (doubled for a seamless loop)
 {
   const cols = ['#dbf130', '#7b5cff', '#ff4dc4', '#2e6bff'];
@@ -109,40 +117,18 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
   fill('[data-marquee]', items + items.replace(/class="marquee__item"/g, 'class="marquee__item" aria-hidden="true"'));
 }
 
-// Coded mockup of the Human Design Academy app. Swap for real screens when ready.
-const hdaMock = () => `
-  <div class="phone" aria-label="Human Design Academy app home screen" role="img">
-    <div class="phone__screen hda">
-      <div class="hda__status"><span>9:41</span><span class="hda__island"></span><span>●●● ▮</span></div>
-      <p class="hda__hi">Good morning,</p>
-      <p class="hda__name">Aarav</p>
-      <div class="hda__streak">
-        <svg class="hda__ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" stroke="rgba(242,242,238,.12)" stroke-width="10" fill="none"/><circle class="hda__ring-fill" cx="60" cy="60" r="50" stroke="#F2F2EE" stroke-width="10" fill="none" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="${reduced ? 18 : 100}" transform="rotate(-90 60 60)"/></svg>
-        <div class="hda__streak-text"><strong>12</strong><span>day streak</span></div>
-        <svg class="hda__scribble" viewBox="0 0 200 120" aria-hidden="true"><path class="hda__scribble-path" d="M24 64 C 20 20, 120 6, 170 34 C 205 56, 176 104, 104 110 C 40 116, 6 90, 22 58 C 30 42, 60 30, 90 28" fill="none" stroke="#FF3B30" stroke-width="4" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="${reduced ? 0 : 100}"/></svg>
-      </div>
-      <div class="hda__week">${['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => `<span class="${i < 5 ? 'is-done' : i === 5 ? 'is-today' : ''}"><i></i>${d}</span>`).join('')}</div>
-      <p class="hda__label">Today</p>
-      <ul class="hda__list">
-        <li class="is-done"><b></b><div><strong>Know your type</strong><span>Lesson 1 · 12 min</span></div></li>
-        <li class="is-now"><b></b><div><strong>Your inner authority</strong><span>Lesson 2 · 18 min</span></div></li>
-        <li><b></b><div><strong>Reading your chart</strong><span>Lesson 3 · locked</span></div></li>
-      </ul>
-    </div>
-  </div>`;
-
 // Selected work tiles
 {
-  const layout = { site: 'tile--tall', hda: 'tile--wide' };
+  const layout = { site: 'tile--tall', hda: 'tile--wide tile--fan' };
   const media = (c) => {
     if (c.media === 'site') return `<div class="tile__scroll"><img src="${c.image}" alt="${esc(c.name)} landing page, full length" loading="lazy" /></div>`;
-    if (c.media === 'hda') return `<div class="phone-wrap">${hdaMock()}</div>`;
-    return `<img src="${c.image}" alt="${esc(c.name)}, designed by Simple" loading="lazy" />`;
+    if (c.media === 'hda') return `<div class="fan">${c.screens.map((src, i) => `<img src="${src}" alt="${i ? '' : esc(c.name) + ' app screens'}" loading="lazy" style="--i:${i - (c.screens.length - 1) / 2};--ia:${Math.abs(i - (c.screens.length - 1) / 2)};z-index:${10 - Math.abs(i - (c.screens.length - 1) / 2) * 2}" />`).join('')}</div>`;
+    return `<img src="${c.image}" alt="${esc(c.name)}, designed by Simple" loading="lazy" />${c.phone ? `<div class="tile__phone" aria-hidden="true"><div><img src="${c.phone}" alt="" loading="lazy" /></div></div>` : ''}`;
   };
   fill('[data-featured]', featured.map((c) => {
     const tag = c.url ? 'a' : 'div';
     const attrs = c.url ? ` href="${c.url}" target="_blank" rel="noopener" aria-label="${esc(c.name)}: ${esc(c.linkLabel || 'Visit')}"` : '';
-    return `<${tag} class="tile ${layout[c.media] || ''}"${attrs} style="--accent:${c.accent}">
+    return `<${tag} class="tile ${layout[c.media] || ''}${c.phone ? ' tile--phone' : ''}"${attrs} data-tilt style="--accent:${c.accent}">
       ${c.status ? `<span class="chip-mono chip-mono--violet tile__status">${esc(c.status)}</span>` : ''}
       <div class="tile__media">${media(c)}</div>
       <div class="tile__cap">
@@ -170,8 +156,8 @@ fill('[data-chipcloud]', ['Landing pages', 'Product UI', 'Mobile apps', 'Brandin
 fill('[data-lab]', work.map((p) => {
   const tag = p.url ? 'a' : 'div';
   const attrs = p.url ? ` href="${p.url}" target="_blank" rel="noopener"` : '';
-  return `<${tag} class="panel lab-card"${attrs}>
-    <div class="lab-card__cover">${p.image ? `<img src="${p.image}" alt="" loading="lazy" />` : coverFor(p.art)}</div>
+  return `<${tag} class="panel lab-card"${attrs} data-tilt>
+    <div class="lab-card__cover">${p.image ? `<img src="${p.image}" alt="${esc(p.name)}" loading="lazy" />` : coverFor(p.art)}</div>
     <div class="lab-card__meta"><span class="lab-card__name">${esc(p.name)}</span><span class="tile__kind">${esc(p.tag)}</span></div>
     <p class="muted lab-card__body">${esc(p.body)}</p>
   </${tag}>`;
@@ -193,7 +179,7 @@ fill('[data-lab]', work.map((p) => {
   const bars = ['lime', 'violet', 'magenta'];
   const icons = ['check', 'quote', 'star'];
   fill('[data-steps]', onboarding.map((s, i) => `
-    <article class="panel step">
+    <article class="panel step" data-tilt>
       <div class="step__vis">${visuals[i]}</div>
       <div class="step__foot">
         <h3 class="bar-title"><span class="sq">${dotsSvg(icons[i])}</span><span class="bar bar--${bars[i]}"></span>${esc(s.title)}</h3>
@@ -243,9 +229,9 @@ fill('[data-lab]', work.map((p) => {
     })(),
   };
   fill('[data-services]', services.map((s) => `
-    <article class="panel feat">
+    <article class="panel feat" data-tilt>
       <div class="feat__head"><h3 class="feat__title">${esc(s.title)}</h3><p class="muted">${esc(s.body)}</p></div>
-      <div class="feat__vis">${illustrations[s.id]}</div>
+      <div class="feat__vis">${s.video ? `<div class="feat__video"><video muted loop playsinline preload="none" poster="${cdn}${s.video}-poster-00001.jpg" aria-label="3D animation: ${esc(s.title)}"><source src="${cdn}${s.video}-transcode.webm" type="video/webm" /><source src="${cdn}${s.video}-transcode.mp4" type="video/mp4" /></video></div>` : illustrations[s.id]}</div>
       <ul class="feat__items">${s.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
     </article>`).join(''));
 }
@@ -268,7 +254,7 @@ fill('[data-lab]', work.map((p) => {
       v: `<button class="b-toggle is-on" type="button" aria-pressed="true" aria-label="Subscription active, click to pause"><span></span><em class="b-toggle__label">Active</em></button>` },
   ];
   fill('[data-benefits]', benefits.map((x) => `
-    <article class="panel feat feat--benefit">
+    <article class="panel feat feat--benefit" data-tilt>
       <div class="feat__vis">${x.v}</div>
       <div class="feat__head"><h3 class="feat__title">${esc(x.t)}</h3><p class="muted">${esc(x.b)}</p></div>
     </article>`).join(''));
@@ -401,19 +387,37 @@ if (!reduced) {
 // Feature cards play their small animations once seen
 $$('.feat').forEach((c) => ScrollTrigger.create({ trigger: c, start: 'top 80%', once: true, onEnter: () => c.classList.add('is-in') }));
 
-// HDA mockup: ring fills, scribble draws
+// 3D renders play while they're on screen
 {
-  const hda = $('.hda');
-  if (hda && !reduced) {
-    ScrollTrigger.create({
-      trigger: hda, start: 'top 85%', once: true,
-      onEnter: () => {
-        gsap.to('.hda__ring-fill', { strokeDashoffset: 18, duration: 1.8, ease: 'expo.out' });
-        gsap.to('.hda__scribble-path', { strokeDashoffset: 0, duration: 1.1, delay: 0.7, ease: 'power2.inOut' });
-        gsap.from('.hda__list li', { x: 24, opacity: 0, duration: 0.9, stagger: 0.12, delay: 0.3, ease: 'expo.out' });
-      },
+  const vids = $$('.feat__video video');
+  if (!reduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.preload = 'auto'; e.target.play().catch(() => {}); } else e.target.pause();
+    }), { threshold: 0.25 });
+    vids.forEach((v) => io.observe(v));
+    // Hover speeds the render up a little
+    vids.forEach((v) => {
+      const card = v.closest('.feat');
+      card.addEventListener('pointerenter', () => (v.playbackRate = 1.6));
+      card.addEventListener('pointerleave', () => (v.playbackRate = 1));
     });
   }
+}
+
+// Cards tilt toward the cursor
+if (finePointer && !reduced) {
+  $$('[data-tilt]').forEach((el) => {
+    gsap.set(el, { transformPerspective: 900 });
+    const rx = gsap.quickTo(el, 'rotationX', { duration: 0.6, ease: 'power3' });
+    const ry = gsap.quickTo(el, 'rotationY', { duration: 0.6, ease: 'power3' });
+    const max = el.classList.contains('tile') ? 5 : 8;
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      ry(((e.clientX - r.left) / r.width - 0.5) * max);
+      rx(-((e.clientY - r.top) / r.height - 0.5) * max);
+    });
+    el.addEventListener('pointerleave', () => { rx(0); ry(0); });
+  });
 }
 
 // FAQ: animated open/close on top of native <details>
@@ -439,6 +443,7 @@ if (!reduced) {
     .from('.app-icons li', { scale: 0, duration: 0.7, stagger: 0.06, ease: 'back.out(2)' }, 0.2)
     .from('.hero__badge', { scale: 0, rotate: -90, duration: 1, ease: 'back.out(1.8)' }, 0.35)
     .from('.arrow', { scaleX: 0, transformOrigin: 'left center', duration: 0.9, ease: 'expo.out' }, 0.6)
+    .from('.wall__row', { y: 60, opacity: 0, duration: 1.4, stagger: 0.12, ease: 'expo.out' }, 0.5)
     .from(['.hero__caption', '.hero__note', '.hero__card'], { y: 30, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out' }, 0.45);
 
   // Section reveals

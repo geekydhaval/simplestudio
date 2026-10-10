@@ -10,23 +10,41 @@ export const links = {
     'https://www.figma.com/proto/169BrrGqY3I61NtGmzjubi/Simple-Prototype?page-id=3%3A36&node-id=5%3A37&viewport=444%2C48%2C0.22&scaling=min-zoom&starting-point-node-id=5%3A37',
 };
 
+// Assets already hosted by the Webflow site (3D renders, design shots, lab covers).
+export const cdn = 'https://cdn.prod.website-files.com/6228a1ac77fdbc74e231731c/';
+
+// The hero wall: designs from the original Webflow hero.
+export const heroDesigns = [
+  { file: '6262b34cc8bed2d6dc28655d_p3.png', alt: 'Isometric space-station illustration for a launch page' },
+  { file: '626d28ee7ca89b4ba3c34b54_P5.png', alt: 'Moneyfi fintech landing page' },
+  { file: '6262b353d06b7114e3ffbbd1_p4.png', alt: 'A wall of posters, apps and illustrations' },
+  { file: '626d29775bef859d7f866b46_P6.png', alt: 'Cryptonite crypto banking landing page' },
+  { file: '641060d93e3041ae8efdf8d8_Botanica_website.png', alt: 'Botanica illustration pack website' },
+  { file: '6262b34ba55b0d0b8c46b548_p1.png', alt: 'Dot smart socket product website' },
+  { file: '6262b34b627a155679edd8d1_p2.png', alt: 'Thincsync shopping dashboard' },
+  { file: '68a91b052a9a950ff388ef58_scallopx.png', alt: 'Scallop app screens' },
+];
+
 export const clients = ['Scallop', 'E Money Network', 'Human Design Academy', 'Iconscout', 'Timeswape', 'Metahome', 'Xlab', 'Paircode'];
 
 export const services = [
   {
     id: 'product',
+    video: '627a4676f605d27ad8614726_SImple_UIUX',
     title: 'Product design and strategy',
     body: 'We help startups turn complex, AI-powered products into experiences people instantly get. Simple to use, beautiful to look at, built to convert.',
     items: ['UI/UX design', 'Rapid prototyping', 'User research & testing', 'Post-launch optimisation'],
   },
   {
     id: 'motion',
+    video: '6277a8f9918df37bfb89cbd0_0001-0350',
     title: 'Motion graphics, films and explainers',
     body: "If it's not moving, it's dead. Motion and a good laugh drive reach and conversion, so we add both to your brand, with a bit of humour.",
     items: ['Explainer animation', 'Motion design', 'Comedy brand sketches', 'Launch films & ads'],
   },
   {
     id: 'brand',
+    video: '627918f42de57199fba5e7c1_simple_final_logo_no_flicker',
     title: 'Digital branding and redesign',
     body: 'A great brand is half the launch. We help ambitious founders build brands with an edge that stands out in a crowded, AI-generated feed.',
     items: ['Logo & brand identity', 'Brand strategy', 'Rebranding', 'Social media branding'],
@@ -36,7 +54,8 @@ export const services = [
 // Selected work — the headline case studies. `media` picks the presentation:
 //   'site'  → a browser frame whose tall screenshot scrolls as you scroll
 //   'image' → a full-bleed image
-//   'hda'   → the coded Human Design Academy app mockup (swap for real screens later)
+//   'hda'   → a fan of real app screens (`screens`) that spreads on hover
+//   `phone` → an optional tall screen that rises and scrolls in a phone on hover
 export const featured = [
   {
     name: 'scallopx.com',
@@ -62,6 +81,7 @@ export const featured = [
     linkLabel: 'See it live',
     media: 'image',
     image: '/work/scallop-app.webp',
+    phone: '/work/scallop-home.webp',
     accent: '#1FA2FF',
   },
   {
@@ -82,8 +102,9 @@ export const featured = [
     client: 'Human Design Academy',
     kind: 'Mobile app',
     industry: 'Education',
-    body: "The academy app for HDA's students. Daily habits, lessons and streaks in one calm home screen, brought to life with Rive-style animations. Built in React Native.",
+    body: "A home for AI builders. Six daily habits roll into one score, friends keep each other honest, and every student gets an agent of their own. Built in React Native.",
     services: ['Product design', 'Rive animation', 'React Native'],
+    screens: ['/work/hda-intro.webp', '/work/hda-habits.webp', '/work/hda-friends.webp', '/work/hda-agent.webp', '/work/hda-house.webp'],
     url: '',
     media: 'hda',
     image: '',
@@ -95,23 +116,23 @@ export const featured = [
 // `art` picks a generative cover from src/art.js.
 // Drop a real screenshot into /public/work and set `image` to use it instead.
 export const work = [
-  { name: 'pfpverse', url: 'https://pfpverse.world', tag: 'NFT collection', art: 'avatars', image: '',
+  { name: 'pfpverse', url: 'https://pfpverse.world', tag: 'NFT collection', art: 'avatars', image: cdn + '63217f8cdbc95450ecac84be_product1.png',
     body: 'Custom-made, detail-crafted premium avatars designed to be your identity in the metaverse.' },
-  { name: 'Surat.one', url: '', tag: 'Virtual city', art: 'city', image: '',
+  { name: 'Surat.one', url: '', tag: 'Virtual city', art: 'city', image: cdn + '63217f8d10e73a4d39ecfbd0_product2.png',
     body: 'A city-wide immersive experience where the people of Surat come together in a virtual city.' },
-  { name: 'Khelaiya', url: '', tag: 'Learning app', art: 'garba', image: '',
+  { name: 'Khelaiya', url: '', tag: 'Learning app', art: 'garba', image: cdn + '6321854aa3ecf806ce6ae266_product4.png',
     body: "Teaches Gujarat's folk dances, Garba and Dandiya, with illustrated, step-by-step guides." },
-  { name: 'Xlab', url: '', tag: 'WebGL site', art: 'sphere', image: '',
+  { name: 'Xlab', url: '', tag: 'WebGL site', art: 'sphere', image: cdn + '63217f8d1f8ef763a39b9ab7_product7.png',
     body: "A WebGL experience we designed and built end-to-end for a client's immersive design studio." },
-  { name: 'Paircode.io', url: 'https://paircode.io', tag: 'Dev tool', art: 'code', image: '',
+  { name: 'Paircode.io', url: 'https://paircode.io', tag: 'Dev tool', art: 'code', image: cdn + '63217f8e2930be4ad98ed112_product8.png',
     body: 'Developers across the world building together with the power of pair programming.' },
-  { name: 'Pixel Car', url: '', tag: 'Game', art: 'pixel', image: '',
+  { name: 'Pixel Car', url: '', tag: 'Game', art: 'pixel', image: cdn + '63217f8d33a8646af1a320b2_product5.png',
     body: "The car of the '90s is back. Warning: you might remember your childhood." },
-  { name: 'L.I.T.I', url: '', tag: 'Puzzle game', art: 'nodes', image: '',
+  { name: 'L.I.T.I', url: '', tag: 'Puzzle game', art: 'nodes', image: cdn + '63217f8dd146f84f978579ca_product6.png',
     body: "You're a newborn hacker. Follow the system's rules, connect the nodes and hack the grid." },
-  { name: 'Metahome.Land', url: '', tag: 'Website', art: 'arches', image: '',
+  { name: 'Metahome.Land', url: '', tag: 'Website', art: 'arches', image: cdn + '639869116658295040f08a45_metahome.png',
     body: 'Futuristic websites for architecture consultancies, designed for the next generation of spaces.' },
-  { name: 'Botanica', url: links.botanica, tag: 'Free resource', art: 'leaves', image: '',
+  { name: 'Botanica', url: links.botanica, tag: 'Free resource', art: 'leaves', image: cdn + '641060d93e3041ae8efdf8d8_Botanica_website.png',
     body: 'Let your designs touch some grass. A free design resource, featured on Product Hunt.' },
 ];
 

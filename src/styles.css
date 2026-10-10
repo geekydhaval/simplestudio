@@ -260,32 +260,63 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .lab-card__meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 0 4px 4px; }
 .lab-card__name { font-weight: 500; font-size: 0.95rem; }
 
-/* HDA phone mockup (inside a work tile) */
-.phone-wrap { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(70% 60% at 50% 100%, rgba(255, 59, 48, 0.2), #090909 70%); }
-.phone { width: min(230px, 66%); aspect-ratio: 9 / 19.2; border-radius: 40px; padding: 8px; background: #1a1a1d; box-shadow: inset 0 0 0 2px #2c2c31, 0 40px 90px -30px rgba(0, 0, 0, 0.9); transform: translateY(14%); }
-.phone__screen { width: 100%; height: 100%; border-radius: 32px; background: #000; overflow: hidden; }
-.hda { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; font-family: 'Outfit Variable', var(--body); color: var(--text); }
-.hda__status { display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 500; padding: 2px 4px 4px; }
-.hda__island { width: 62px; height: 18px; border-radius: 999px; background: #1a1a1d; }
-.hda__hi { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.hda__name { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; margin-top: -4px; }
-.hda__streak { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 16px; background: #111114; }
-.hda__ring { width: 52px; height: 52px; flex: none; }
-.hda__streak-text strong { display: block; font-size: 26px; line-height: 1; font-weight: 600; }
-.hda__streak-text span { font-size: 10px; color: var(--muted); }
-.hda__scribble { position: absolute; left: 42px; top: -8px; width: 128px; height: 80px; pointer-events: none; }
-.hda__week { display: flex; justify-content: space-between; }
-.hda__week span { display: grid; justify-items: center; gap: 3px; font-size: 9px; color: var(--muted); }
-.hda__week i { width: 18px; height: 18px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px rgba(242, 242, 238, 0.2); }
-.hda__week .is-done i { background: var(--text); box-shadow: none; }
-.hda__week .is-today i { box-shadow: inset 0 0 0 1.5px #ff3b30; }
-.hda__list { display: grid; gap: 6px; }
-.hda__list li { display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #111114; }
-.hda__list b { width: 15px; height: 15px; flex: none; border-radius: 999px; box-shadow: inset 0 0 0 1.5px rgba(242, 242, 238, 0.3); }
-.hda__list .is-done b { background: var(--text); box-shadow: none; }
-.hda__list .is-now b { box-shadow: inset 0 0 0 1.5px #ff3b30; }
-.hda__list strong { display: block; font-size: 11px; font-weight: 500; line-height: 1.2; }
-.hda__list span { font-size: 9.5px; color: var(--muted); }
+/* HDA: a fan of real app screens that spreads on hover */
+.tile--fan .tile__media { min-height: 400px; background: radial-gradient(70% 70% at 50% 100%, rgba(255, 59, 48, 0.22), #0b0b0b 70%); }
+.fan { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 70px; }
+.tile__media { z-index: 0; }
+.fan img { position: absolute; width: clamp(110px, 17%, 160px); height: auto; border-radius: 22px; box-shadow: 0 0 0 4px #1a1a1d, 0 0 0 5px #2c2c31, 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+  transform: translateX(calc(var(--i) * 34%)) translateY(calc(var(--ia) * 6%)) rotate(calc(var(--i) * 5deg)); transition: transform 0.9s var(--ease); }
+.tile--fan:hover .fan img, .tile--fan:focus-within .fan img { transform: translateX(calc(var(--i) * 108%)) translateY(calc(var(--ia) * 3% - 4%)) rotate(calc(var(--i) * 2deg)); }
+
+/* Scallop: the home screen rises out of the tile and scrolls */
+.tile__phone { position: absolute; right: 7%; bottom: 0; width: clamp(110px, 34%, 170px); aspect-ratio: 375 / 760; padding: 6px; border-radius: 26px 26px 0 0; background: #1a1a1d; box-shadow: inset 0 0 0 2px #2c2c31, 0 -20px 60px -10px rgba(0, 0, 0, 0.8);
+  transform: translateY(105%); transition: transform 0.9s var(--ease); z-index: 1; }
+.tile__phone > div { width: 100%; height: 100%; border-radius: 21px 21px 0 0; overflow: hidden; background: #fff; }
+.tile__phone img { width: 100%; height: auto; transition: transform 4s cubic-bezier(0.45, 0, 0.2, 1) 0.4s; }
+.tile--phone:hover .tile__phone, .tile--phone:focus-visible .tile__phone { transform: translateY(8%); }
+.tile--phone:hover .tile__phone img { transform: translateY(-46%); }
+
+/* Hero wall */
+.wall { position: relative; z-index: 1; display: grid; gap: 14px; padding: 0 0 clamp(2.5rem, 5vw, 3.5rem); overflow: hidden; perspective: 1400px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.wall__row { transform: rotateX(14deg) rotateZ(-3deg); transform-origin: center top; }
+.wall__track { display: flex; gap: 14px; width: max-content; padding: 10px 7px; animation: marquee 60s linear infinite; }
+.wall__row--rev .wall__track { animation-direction: reverse; animation-duration: 70s; }
+.wall:hover .wall__track { animation-play-state: paused; }
+.wall__card { margin: 0; flex: none; width: clamp(180px, 20vw, 290px); aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #161616;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 24px 50px -24px rgba(0, 0, 0, 0.9); transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), filter 0.6s; filter: saturate(0.85) brightness(0.88); }
+.wall__card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.wall__card:hover { transform: translateY(-14px) scale(1.06) rotate(-1deg); filter: none; box-shadow: 0 0 0 2px var(--lime), 0 40px 70px -24px rgba(0, 0, 0, 0.95); z-index: 2; }
+.wall__card:hover img { transform: scale(1.08); }
+
+/* Service 3D renders */
+.feat__video { width: 100%; border-radius: 14px; overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); }
+.feat__video video { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1s var(--ease); }
+.feat:hover .feat__video video { transform: scale(1.07); }
+
+/* Lab covers */
+.lab-card__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.lab-card:hover .lab-card__cover img { transform: scale(1.08); }
+.lab-card { transition: box-shadow 0.4s; }
+.lab-card:hover { box-shadow: inset 0 0 0 1px rgba(219, 241, 48, 0.35), 0 30px 60px -30px rgba(0, 0, 0, 0.9); }
+
+/* Hover polish */
+.tile { transition: box-shadow 0.4s; }
+.tile:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 30px 60px -30px rgba(0, 0, 0, 0.9); }
+.chip-cloud li { transition: color 0.25s, background 0.25s, box-shadow 0.25s; }
+.chip-cloud li:hover { color: #111; background: var(--lime); box-shadow: none; }
+.chip-cloud li:hover::before { color: #111; }
+.step:hover .bar, .mini-card:hover .bar, .side-card:hover .bar { height: 34px; }
+.bar { transition: height 0.4s var(--ease); }
+.sq svg { transition: transform 0.5s var(--ease); }
+.panel:hover .sq svg { transform: rotate(90deg) scale(1.1); }
+.app-icons li { transition: transform 0.4s var(--ease); }
+.app-icons li:hover { transform: translateY(-4px) rotate(-8deg) scale(1.15); }
+.marquee__item i { transition: transform 0.3s var(--ease); }
+.marquee__item:hover i { transform: scale(1.8) rotate(45deg); }
+.team__faces li:hover { transform: translateY(-6px) scale(1.1); z-index: 2; }
+.footer__word { transition: color 0.6s; }
+.footer__word:hover { color: #262626; }
 
 /* ── Pitch ────────────────────────────────────────── */
 .pitch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); padding: clamp(4rem, 8vw, 6rem) 0; }
@@ -473,7 +504,6 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .panel::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.4s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.045), transparent 70%); }
 .panel:hover::after { opacity: 1; }
 .tile--wide { grid-column: span 2; }
-.tile--wide .tile__media { min-height: 360px; }
 .lab-card__body { font-size: 0.85rem; line-height: 1.4; padding: 0 4px 6px; }
 .ticket__for { display: block !important; font-size: 0.875rem !important; color: #555 !important; margin-bottom: 0.2rem; }
 .vis-plan__btn { display: block !important; }

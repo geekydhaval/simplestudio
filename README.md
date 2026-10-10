@@ -4,6 +4,8 @@ The landing page for **Simple Design**: product design, Webflow, 3D and motion f
 
 Visual language: a dark three-column grid with dashed guides and "+" markers, extra-black extended uppercase headlines, light skeuomorphic cards, pressable dark buttons with dot-matrix icons and mono chips. All of it carries Simple's own brand: the 4×6 diagonal-line mark from the *Logo – Rebrand* file and the Simple lime `#DBF130`.
 
+Right under the hero, a wall of designs from the original site drifts past (hover to stop it and lift a card). The services show the studio's 3D renders, which play when on screen.
+
 **The work comes first.** Right after the hero and the client strip, *Selected work* shows scallopx.com (hover to scroll the full landing page), the Scallop app, E Money Network's 3D landing page (in progress) and the Human Design Academy app. Our own products live in *From the lab*.
 
 ## Sections
@@ -36,7 +38,6 @@ npm run build    # outputs to /dist (static, deploy anywhere: Vercel, Netlify, G
 
 ## To do
 
-- Replace the coded Human Design Academy mockup with real app screens.
 - Add more Emoney and Scallop screens as they're ready.
 - Point the social links in `src/data.js` at the real profiles.
 

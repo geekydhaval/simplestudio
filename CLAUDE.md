@@ -17,6 +17,11 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - Motion/interaction: `src/main.js`. Line field behind the logo object: `src/lines.js`. Generated covers/avatars: `src/art.js`.
 - Tokens and styles: `src/styles.css` (`:root` holds palette, fonts, frame width).
 
+## Media
+- 3D renders, hero-wall designs and lab covers are served from the Webflow CDN (`cdn` in `src/data.js`), not copied into the repo. If the Webflow site's assets are ever deleted, download them into `public/work/` and point the data at the local paths.
+- App screens from Figma live in `public/work/` (`hda-*.webp`, `scallop-home.webp`).
+- Service videos play only while on screen (IntersectionObserver) and speed up on hover.
+
 ## Design rules (keep these)
 - Background `#0f0f0f` with a faint 44px grid. Lime `#DBF130` is the signal colour (CTAs, the hero badge, ticket band, highlights). Violet, magenta and blue are accents (chips, bars, dots).
 - Fonts: Archivo Variable at `wdth` 125 / weight 900 for display (uppercase), Sofia Pro (fallback Outfit Variable) for body, Geist Mono Variable for chips and labels.
@@ -32,3 +37,5 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - Reveal targets are set to opacity 0 by GSAP and revealed with `ScrollTrigger.batch`; if you add a section, add its cards to `revealSel`.
 - After content changes that affect height, call `ScrollTrigger.refresh()` (already done on font load, window load, FAQ toggle and plan switch).
 - The scallopx tile scrolls its tall screenshot on hover using `--scroll`, computed after the image loads.
+- `--a` is a registered `@property` (angle) used by the glow card. Never reuse `--a` for anything else; the HDA fan uses `--i` / `--ia`.
+- `[data-tilt]` cards are tilted by GSAP on pointer move; don't add CSS transform transitions to those elements.
