@@ -41,4 +41,4 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - `[data-tilt]` cards are tilted by GSAP on pointer move; don't add CSS transform transitions to those elements.
 
 ## Social preview
-- `public/og.png` (1200×630) is rendered from `og/og.html` with Playwright: `python3 og/render.py`. Edit the HTML and re-render when the headline or work changes.
+- `public/og.png` (1200×630) is rendered from `og/og.html` with Playwright: `python3 og/render.py`. Alternatives live in `og/og-b.html` and `og/og-c.html` (previews in `og/variants/`); render one with `python3 og/render.py og-b public/og.png` to make it the live image.
