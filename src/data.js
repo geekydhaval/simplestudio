@@ -25,6 +25,46 @@ export const heroDesigns = [
   { file: '68a91b052a9a950ff388ef58_scallopx.png', alt: 'Scallop app screens' },
 ];
 
+// The four crafts under the hero. Hover (or tap) an icon and its work fans out.
+// shape: 'phone' (tall screen), 'card' (landscape) or 'video' (a 3D render that plays while open)
+export const crafts = [
+  {
+    id: 'app', label: 'App design', items: [
+      { src: '/work/hda-habits.webp', alt: 'Human Design Academy habit score', shape: 'phone' },
+      { src: '/work/scallop-home.webp', alt: 'Scallop app home', shape: 'phone' },
+      { src: '/work/hda-agent.webp', alt: 'Human Design Academy agent', shape: 'phone' },
+      { src: '/work/hda-friends.webp', alt: 'Human Design Academy friends', shape: 'phone' },
+      { src: '/work/hda-house.webp', alt: 'Human Design Academy house reveal', shape: 'phone' },
+    ],
+  },
+  {
+    id: 'web', label: 'Website design', items: [
+      { src: '/work/emoney-hero.webp', alt: 'E Money Network website', shape: 'card' },
+      { src: '/work/clis-site.webp', alt: 'CLIS interior design website', shape: 'card' },
+      { src: '/work/scallopx-site.webp', alt: 'scallopx.com', shape: 'card', pos: 'top' },
+      { src: cdn + '626d28ee7ca89b4ba3c34b54_P5.png', alt: 'Moneyfi website', shape: 'card', pos: 'top' },
+      { src: cdn + '626d29775bef859d7f866b46_P6.png', alt: 'Cryptonite website', shape: 'card', pos: 'top' },
+    ],
+  },
+  {
+    id: 'brand', label: 'Brand design', items: [
+      { src: cdn + '627bc25d72624227adec3fd3_simple%20logo.jpg', alt: 'Simple brand identity', shape: 'card' },
+      { src: cdn + '63217f8cdbc95450ecac84be_product1.png', alt: 'pfpverse brand', shape: 'card' },
+      { src: cdn + '6262b353d06b7114e3ffbbd1_p4.png', alt: 'Posters and brand pieces', shape: 'card' },
+      { src: cdn + '641060d93e3041ae8efdf8d8_Botanica_website.png', alt: 'Botanica illustration pack', shape: 'card' },
+      { src: cdn + '63217f8d55025feecfa4de30_product3.png', alt: 'Freebies by Simple', shape: 'card' },
+    ],
+  },
+  {
+    id: 'motion', label: 'Motion design', items: [
+      { video: '627a4676f605d27ad8614726_SImple_UIUX', alt: '3D product design animation', shape: 'video' },
+      { video: '6277a8f9918df37bfb89cbd0_0001-0350', alt: '3D motion design animation', shape: 'video' },
+      { video: '627918f42de57199fba5e7c1_simple_final_logo_no_flicker', alt: '3D branding animation', shape: 'video' },
+      { src: cdn + '627bc25d7c783940e0ba7180_simple%20motion.jpg', alt: 'Simple motion reel still', shape: 'card' },
+    ],
+  },
+];
+
 export const clients = ['Scallop', 'E Money Network', 'Human Design Academy', 'CLIS', 'Iconscout', 'Timeswape', 'Metahome', 'Xlab', 'Paircode'];
 
 export const services = [

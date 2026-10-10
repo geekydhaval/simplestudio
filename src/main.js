@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { createLineField } from './lines.js';
 import { coverFor, avatarFor } from './art.js';
-import { cdn, heroDesigns, clients, services, featured, work, plans, onboarding, team, faqs, socials } from './data.js';
+import { cdn, crafts, clients, services, featured, work, plans, onboarding, team, faqs, socials } from './data.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,11 +104,90 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
   fill('[data-icons]', icons.map((i) => `<li style="--c:${i.c}" title="${i.label}"><svg viewBox="0 0 20 20" aria-label="${i.label}">${i.svg}</svg></li>`).join(''));
 }
 
-// Hero wall: one straight row of designs drifting past
+// Crafts: four app-style icons. Each holds a stack of work that peeks out from behind it,
+// and fans out above it on hover / focus / tap.
 {
-  const card = (d, hide) => `<figure class="wall__card"${hide ? ' aria-hidden="true"' : ''}><img src="${cdn}${d.file}" alt="${hide ? '' : esc(d.alt)}" loading="lazy" /></figure>`;
-  const row = (list, rev) => `<div class="wall__row${rev ? ' wall__row--rev' : ''}"><div class="wall__track">${list.map((d) => card(d)).join('')}${list.map((d) => card(d, true)).join('')}</div></div>`;
-  fill('[data-wall]', row(heroDesigns));
+  const glyphs = {
+    app: '<rect x="18" y="8" width="28" height="48" rx="7" fill="none" stroke="#fff" stroke-width="4"/><rect x="27" y="13" width="10" height="3" rx="1.5" fill="#fff"/><rect x="25" y="24" width="14" height="14" rx="4" fill="#fff" opacity=".9"/>',
+    web: '<rect x="6" y="12" width="52" height="40" rx="7" fill="none" stroke="#fff" stroke-width="4"/><path d="M6 22h52" stroke="#fff" stroke-width="4"/><circle cx="13" cy="17" r="1.6" fill="#fff"/><circle cx="19" cy="17" r="1.6" fill="#fff"/><rect x="14" y="30" width="20" height="5" rx="2.5" fill="#fff"/><rect x="14" y="39" width="12" height="5" rx="2.5" fill="#fff" opacity=".6"/>',
+    brand: '',
+    motion: '<path d="M8 50 C 24 50, 26 14, 56 14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="56" cy="14" r="6" fill="#fff"/><circle cx="8" cy="50" r="4" fill="#fff" opacity=".6"/>',
+  };
+  const n = crafts.length;
+  const html = crafts.map((c, ci) => {
+    // horizontal nudge so the fans of the outer icons stay inside the frame
+    const shift = (((n - 1) / 2 - ci) / ((n - 1) / 2)) * 150;
+    const cards = c.items.map((it, i) => {
+      const k = i - (c.items.length - 1) / 2;
+      const phone = it.shape === 'phone';
+      const dx = phone ? 118 : 150;
+      const x = k * dx + shift;
+      const y = -(phone ? 230 : 205) + Math.abs(k) * Math.abs(k) * 14;
+      const r = k * (phone ? 6 : 7);
+      // the closed "peek": the first three tuck behind the icon like papers in a folder
+      const peek = i < 3 ? [(i - 1) * 26, -74 - (i === 1 ? 14 : 0), (i - 1) * 12] : [0, 0, 0];
+      const media = it.video
+        ? `<video muted loop playsinline preload="none" poster="${cdn}${it.video}-poster-00001.jpg" aria-label="${esc(it.alt)}"><source src="${cdn}${it.video}-transcode.webm" type="video/webm" /><source src="${cdn}${it.video}-transcode.mp4" type="video/mp4" /></video>`
+        : `<img src="${it.src}" alt="${esc(it.alt)}" loading="lazy"${it.pos ? ` style="object-position:center ${it.pos}"` : ''} />`;
+      return `<figure class="craft__card craft__card--${it.shape}${i < 3 ? ' is-peek' : ''}" style="--x:${x.toFixed(0)}px;--y:${y.toFixed(0)}px;--r:${r}deg;--px:${peek[0]}px;--py:${peek[1]}px;--pr:${peek[2]}deg;--d:${(i * 0.045).toFixed(3)}s">${media}</figure>`;
+    }).join('');
+    const icon = c.id === 'brand'
+      ? `<span class="craft__glyph craft__glyph--mark">${mark('badge')}</span>`
+      : `<svg class="craft__glyph" viewBox="0 0 64 64" aria-hidden="true">${glyphs[c.id]}</svg>`;
+    return `<div class="craft__item craft__item--${c.id}">
+      <div class="craft__cards" aria-hidden="true">${cards}</div>
+      <button class="craft__btn" type="button" aria-expanded="false" aria-label="${esc(c.label)}: show work">
+        <span class="craft__icon">${icon}</span>
+        <span class="craft__label">${esc(c.label)}</span>
+      </button>
+    </div>`;
+  }).join('');
+  const stage = fill('[data-craft]', html);
+  const tray = $('[data-craft-tray]');
+  const items = $$('.craft__item', stage);
+  const playVideos = (item, on) => $$('video', item).forEach((v) => {
+    if (on && !reduced) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+  });
+  const setOpen = (item, on) => {
+    item.classList.toggle('is-open', on);
+    $('.craft__btn', item).setAttribute('aria-expanded', String(on));
+    $('.craft__cards', item).setAttribute('aria-hidden', String(!on));
+    playVideos(item, on);
+  };
+  items.forEach((item) => {
+    const btn = $('.craft__btn', item);
+    if (finePointer) {
+      item.addEventListener('pointerenter', () => { items.forEach((o) => o !== item && setOpen(o, false)); setOpen(item, true); });
+      item.addEventListener('pointerleave', () => setOpen(item, false));
+    }
+    btn.addEventListener('focus', () => setOpen(item, true));
+    btn.addEventListener('blur', () => { if (!item.matches(':hover')) setOpen(item, false); });
+    // Tap (touch) toggles; on small screens the work shows in a tray under the icons
+    btn.addEventListener('click', () => {
+      const on = finePointer ? true : !item.classList.contains('is-open');
+      items.forEach((o) => o !== item && setOpen(o, false));
+      setOpen(item, on);
+      tray.innerHTML = on ? $('.craft__cards', item).innerHTML : '';
+      tray.classList.toggle('is-filled', on);
+      $$('video', tray).forEach((v) => { v.preload = 'auto'; v.play().catch(() => {}); });
+    });
+  });
+
+  // One-time demo on desktop: each craft opens in turn so people see the trick, until they hover
+  if (finePointer && !reduced) {
+    let stopped = false;
+    const stop = () => { stopped = true; items.forEach((o) => !o.matches(':hover') && setOpen(o, false)); };
+    stage.addEventListener('pointerenter', stop, { once: true });
+    const io = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      items.forEach((item, i) => {
+        setTimeout(() => { if (!stopped) setOpen(item, true); }, 900 + i * 1500);
+        setTimeout(() => { if (!stopped) setOpen(item, false); }, 900 + i * 1500 + 1250);
+      });
+    }, { threshold: 0.6 });
+    io.observe(stage);
+  }
 }
 
 // Clients marquee (doubled for a seamless loop)
@@ -444,7 +523,8 @@ if (!reduced) {
     .from('.app-icons li', { scale: 0, duration: 0.7, stagger: 0.06, ease: 'back.out(2)' }, 0.2)
     .from('.hero__badge', { scale: 0, rotate: -90, duration: 1, ease: 'back.out(1.8)' }, 0.35)
     .from('.arrow', { scaleX: 0, transformOrigin: 'left center', duration: 0.9, ease: 'expo.out' }, 0.6)
-    .from('.wall__row', { y: 60, opacity: 0, duration: 1.4, stagger: 0.12, ease: 'expo.out' }, 0.5)
+    .from('.craft__item', { y: 70, opacity: 0, duration: 1.4, stagger: 0.09, ease: 'expo.out' }, 0.5)
+    .from('.craft__hint', { opacity: 0, y: 10, duration: 1, ease: 'expo.out' }, 1.1)
     .from(['.hero__caption', '.hero__note', '.hero__card'], { y: 30, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out' }, 0.45);
 
   // Section reveals

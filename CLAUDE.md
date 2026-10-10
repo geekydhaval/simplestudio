@@ -18,9 +18,13 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - Tokens and styles: `src/styles.css` (`:root` holds palette, fonts, frame width).
 
 ## Media
-- 3D renders, hero-wall designs and lab covers are served from the Webflow CDN (`cdn` in `src/data.js`), not copied into the repo. If the Webflow site's assets are ever deleted, download them into `public/work/` and point the data at the local paths.
+- 3D renders, craft-fan images and lab covers are served from the Webflow CDN (`cdn` in `src/data.js`), not copied into the repo. If the Webflow site's assets are ever deleted, download them into `public/work/` and point the data at the local paths.
 - App screens from Figma live in `public/work/` (`hda-*.webp`, `scallop-home.webp`).
 - Service videos play only while on screen (IntersectionObserver) and speed up on hover.
+
+## Crafts (under the hero)
+- Four app-style icons (App, Website, Brand, Motion) from `crafts` in `src/data.js`. Each holds a stack of work that peeks out from behind it and fans out in an arc on hover/focus (CSS transitions driven by `.is-open`; positions are `--x/--y/--r` set in `main.js`). On touch screens a tap opens the work in a horizontal tray under the icons. On desktop the four open once in turn when the section first comes into view, until the visitor hovers.
+- Motion cards are 3D render videos that only play while their craft is open.
 
 ## Design rules (keep these)
 - Background `#0f0f0f` with a faint 44px grid. Lime `#DBF130` is the signal colour (CTAs, the hero badge, ticket band, highlights). Violet, magenta and blue are accents (chips, bars, dots).

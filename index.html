@@ -77,8 +77,14 @@
         </div>
       </section>
 
-      <!-- DESIGN WALL: work from the original site, drifting past -->
-      <section class="wall" aria-label="A few designs we've made" data-wall></section>
+      <!-- CRAFTS: four icons; hover (or tap) one and its work fans out -->
+      <section class="craft frame" aria-label="What we design">
+        <p class="craft__hint"><span class="craft__hint-text"><span class="hover-only">Hover</span><span class="tap-only">Tap</span> to see the magic</span>
+          <svg class="craft__arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M4 8 C 40 4, 80 14, 96 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 5"/><path d="M86 40 L 97 47 L 102 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <div class="craft__stage" data-craft></div>
+        <div class="craft__tray" data-craft-tray aria-live="polite"></div>
+      </section>
 
       <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
