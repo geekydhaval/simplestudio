@@ -341,9 +341,9 @@ fill('[data-lab]', work.map((p) => {
     { t: 'Unlimited requests', b: 'Add as many requests to your board as you like. We work through them one by one, in your order.',
       v: `<div class="b-stack">${[3, 2, 1].map((n) => `<div>Request 0${n}<i></i></div>`).join('')}</div>` },
     { t: 'Lightning-fast delivery', b: 'Most requests land in one to four days. Simple designs often in one or two.',
-      v: `<div class="b-track"><div class="b-track__bar"><span></span></div><div class="b-track__labels"><span>Request</span><span>1–4 days</span><span>Delivered</span></div></div>` },
+      v: `<div class="b-track"><div class="b-track__bar"><span></span><b class="b-track__bolt"><svg viewBox="0 0 24 24"><path d="M13.5 2 4 14h7l-1.5 8L20 9.5h-7z" fill="#111"/></svg></b></div><div class="b-track__labels"><span>Request</span><span>1–4 days</span><span>Delivered</span></div></div>` },
     { t: 'One flat plan', b: 'One monthly plan, scoped to you. No hourly bills, no surprise invoices.',
-      v: `<div class="b-loop"><svg viewBox="0 0 200 110" fill="none"><ellipse cx="100" cy="55" rx="96" ry="50" stroke="#2c2c2c" stroke-dasharray="4 6"/><circle cx="196" cy="55" r="4" fill="#7b5cff"/><circle cx="4" cy="55" r="4" fill="#ff4dc4"/></svg><span class="b-loop__pill">One plan</span></div>` },
+      v: `<div class="b-loop"><svg viewBox="0 0 200 110" fill="none"><ellipse cx="100" cy="55" rx="96" ry="50" stroke="#2c2c2c" stroke-dasharray="4 6"/></svg><i class="b-loop__dot"></i><i class="b-loop__dot"></i><span class="b-loop__pill">One plan</span></div>` },
     { t: 'Unique and all yours', b: 'Every design is made for you and is 100% yours. Figma files included.',
       v: `<div class="b-mark">${mark('benefit')}</div>` },
     { t: 'Top-notch quality', b: 'Senior-level craft on every request, directed by a designer with 8+ years in the industry.',
@@ -356,6 +356,8 @@ fill('[data-lab]', work.map((p) => {
       <div class="feat__vis">${x.v}</div>
       <div class="feat__head"><h3 class="feat__title">${esc(x.t)}</h3><p class="muted">${esc(x.b)}</p></div>
     </article>`).join(''));
+  $$('.b-mark line').forEach((l, i) => l.style.setProperty('--i', i));
+  $$('.b-stars > svg').forEach((st, i) => st.style.setProperty('--i', i));
   const tog = $('.b-toggle');
   tog?.addEventListener('click', () => {
     const on = !tog.classList.contains('is-on');
