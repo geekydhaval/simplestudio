@@ -120,7 +120,7 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
 
 // Selected work tiles
 {
-  const layout = { site: 'tile--tall', hda: 'tile--wide tile--fan' };
+  const layout = { site: 'tile--tall', hda: 'tile--wide tile--fan', tall: 'tile--tall', wide: 'tile--wide tile--hero' };
   const media = (c) => {
     if (c.media === 'site') return `<div class="tile__scroll"><img src="${c.image}" alt="${esc(c.name)} landing page, full length" loading="lazy" /></div>`;
     if (c.media === 'hda') return `<div class="fan">${c.screens.map((src, i) => `<img src="${src}" alt="${i ? '' : esc(c.name) + ' app screens'}" loading="lazy" style="--i:${i - (c.screens.length - 1) / 2};--ia:${Math.abs(i - (c.screens.length - 1) / 2)};z-index:${10 - Math.abs(i - (c.screens.length - 1) / 2) * 2}" />`).join('')}</div>`;
@@ -129,12 +129,12 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
   fill('[data-featured]', featured.map((c) => {
     const tag = c.url ? 'a' : 'div';
     const attrs = c.url ? ` href="${c.url}" target="_blank" rel="noopener" aria-label="${esc(c.name)}: ${esc(c.linkLabel || 'Visit')}"` : '';
-    return `<${tag} class="tile ${layout[c.media] || ''}${c.phone ? ' tile--phone' : ''}"${attrs} data-tilt style="--accent:${c.accent}">
+    return `<${tag} class="tile ${layout[c.layout] || layout[c.media] || ''}${c.phone ? ' tile--phone' : ''}"${attrs} data-tilt style="--accent:${c.accent}">
       ${c.status ? `<span class="chip-mono chip-mono--violet tile__status">${esc(c.status)}</span>` : ''}
       <div class="tile__media">${media(c)}</div>
       <div class="tile__cap">
         <div><p class="tile__name">${esc(c.name)}</p><p class="tile__kind">${esc(c.kind)} · ${esc(c.industry)}</p></div>
-        ${c.url ? '<span class="tile__go" aria-hidden="true">↗</span>' : `<span class="tile__kind">${c.media === 'hda' ? 'App Store soon' : 'Launching soon'}</span>`}
+        ${c.url ? (c.cta ? `<span class="tile__cta">${esc(c.linkLabel)} <span aria-hidden="true">↗</span></span>` : '<span class="tile__go" aria-hidden="true">↗</span>') : `<span class="tile__kind">${c.media === 'hda' ? 'App Store soon' : 'Launching soon'}</span>`}
       </div>
     </${tag}>`;
   }).join(''));
@@ -175,7 +175,7 @@ fill('[data-lab]', work.map((p) => {
        <li class="vis-plan__btn"><span class="btn-dark" aria-hidden="true"><span class="btn-dark__icon">${dotsSvg('arrow')}</span><span>Get started</span></span></li></ul>${cursor}`,
     `<div class="vis-rows">${row(chipsA)}${row(chipsB, true)}</div>
      <div class="vis-req"><div class="vis-req__logo">${mark('req')}</div><div class="vis-req__input">Design a landing page for our AI launch</div><div class="vis-req__meta"><i></i>Due in 2 days</div></div>`,
-    `<div class="vis-frames"><div><span>v1</span></div><div><span>Final</span><span>.fig</span></div><div><span>v2</span></div></div>`,
+    `<div class="vis-frames"><div><img src="/work/hda-habits.webp" alt="" loading="lazy" /><span>v1</span></div><div><img src="/work/scallop-home.webp" alt="" loading="lazy" /><span>Final .fig</span></div><div><img src="/work/hda-agent.webp" alt="" loading="lazy" /><span>v2</span></div></div>`,
   ];
   const bars = ['lime', 'violet', 'magenta'];
   const icons = ['check', 'quote', 'star'];

@@ -235,6 +235,10 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .tile__go { font-size: 0.85rem; color: #777; transition: color 0.2s, transform 0.3s var(--ease); }
 .tile:hover .tile__go { color: var(--lime); transform: translate(2px, -2px); }
 .tile__status { position: absolute; top: 10px; left: 10px; z-index: 2; }
+.tile__cta { flex: none; padding: 7px 11px; border-radius: 8px; font-size: 0.8125rem; color: #191919; background: linear-gradient(180deg, #ececec, #c9c9c9); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0, 0, 0, 0.4); transition: background 0.3s; }
+.tile:hover .tile__cta { background: var(--lime); }
+.tile--hero .tile__media { min-height: 0; aspect-ratio: 1440 / 900; }
+.tile--hero .tile__media > img { object-position: center 30%; }
 
 .work__side { display: grid; gap: 1.25rem; position: sticky; top: 96px; }
 .side-card { padding: 1.4rem; display: grid; gap: 1.1rem; }
@@ -360,14 +364,17 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .vis-req__meta i { width: 8px; height: 8px; border-radius: 999px; background: #555; }
 /* step 3: receive */
 .vis-frames { position: absolute; inset: 0; display: grid; place-items: center; perspective: 900px; }
-.vis-frames div { position: absolute; width: 46%; aspect-ratio: 3 / 4; border-radius: 12px; background: linear-gradient(180deg, #1f1f1f, #121212); box-shadow: inset 0 0 0 1px #2c2c2c, 0 30px 50px -20px rgba(0, 0, 0, 0.95); display: flex; align-items: flex-end; justify-content: space-between; padding: 10px; font-family: var(--mono); font-size: 0.55rem; color: #666; text-transform: uppercase; }
-.vis-frames div:nth-child(1) { transform: translateX(-46%) rotateY(28deg) rotateZ(-6deg); }
-.vis-frames div:nth-child(2) { transform: translateY(-4%); z-index: 2; background: linear-gradient(180deg, #262626, #151515); }
-.vis-frames div:nth-child(3) { transform: translateX(46%) rotateY(-28deg) rotateZ(6deg); }
-.vis-frames div:nth-child(2)::before { content: ''; position: absolute; inset: 12px 12px 34px; border-radius: 8px; background: url('/work/scallop-app.webp') center top / cover; opacity: 0.9; }
-.step:hover .vis-frames div:nth-child(1) { transform: translateX(-56%) rotateY(28deg) rotateZ(-9deg); }
-.step:hover .vis-frames div:nth-child(3) { transform: translateX(56%) rotateY(-28deg) rotateZ(9deg); }
-.vis-frames div { transition: transform 0.8s var(--ease); }
+.vis-frames > div { position: absolute; top: 26px; width: 34%; aspect-ratio: 393 / 760; padding: 5px; border-radius: 22px; background: #1a1a1d; box-shadow: inset 0 0 0 1.5px #2e2e33, 0 30px 50px -20px rgba(0, 0, 0, 0.95); overflow: hidden; }
+.vis-frames img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 17px; display: block; }
+.vis-frames span { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 4px 8px; border-radius: 999px; white-space: nowrap; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.05em; text-transform: uppercase; color: #ddd; background: rgba(15, 15, 15, 0.82); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.vis-frames > div:nth-child(1) { transform: translateX(-62%) rotateY(24deg) rotateZ(-7deg) scale(0.9); filter: brightness(0.7); }
+.vis-frames > div:nth-child(2) { z-index: 2; transform: translateY(-2%); }
+.vis-frames > div:nth-child(2) span { color: #1b1f00; background: var(--lime); }
+.vis-frames > div:nth-child(3) { transform: translateX(62%) rotateY(-24deg) rotateZ(7deg) scale(0.9); filter: brightness(0.7); }
+.step:hover .vis-frames > div:nth-child(1) { transform: translateX(-80%) rotateY(18deg) rotateZ(-10deg) scale(0.92); filter: brightness(0.9); }
+.step:hover .vis-frames > div:nth-child(2) { transform: translateY(-6%) scale(1.04); }
+.step:hover .vis-frames > div:nth-child(3) { transform: translateX(80%) rotateY(-18deg) rotateZ(10deg) scale(0.92); filter: brightness(0.9); }
+.vis-frames > div { transition: transform 0.8s var(--ease), filter 0.8s; }
 
 /* ── Services & benefits ──────────────────────────── */
 .feat { display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
