@@ -105,9 +105,10 @@ $$('[data-dots]').forEach((el) => (el.innerHTML = dotsSvg(el.dataset.dots)));
 // Hero wall: two rows of designs drifting in opposite directions
 {
   const half = Math.ceil(heroDesigns.length / 2);
+  // Both rows carry every design, offset, so the loop never shows a repeat side by side.
   const card = (d, hide) => `<figure class="wall__card"${hide ? ' aria-hidden="true"' : ''}><img src="${cdn}${d.file}" alt="${hide ? '' : esc(d.alt)}" loading="lazy" /></figure>`;
   const row = (list, rev) => `<div class="wall__row${rev ? ' wall__row--rev' : ''}"><div class="wall__track">${list.map((d) => card(d)).join('')}${list.map((d) => card(d, true)).join('')}</div></div>`;
-  fill('[data-wall]', row(heroDesigns.slice(0, half)) + row(heroDesigns.slice(half), true));
+  fill('[data-wall]', row(heroDesigns) + row([...heroDesigns.slice(half), ...heroDesigns.slice(0, half)].reverse(), true));
 }
 
 // Clients marquee (doubled for a seamless loop)
