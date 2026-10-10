@@ -1,14 +1,14 @@
-# Simple Studio — landing page
+# Simple Design — landing page
 
-A new landing page for **Simple Studio**: product design, Webflow, 3D and motion for startups building in the age of AI.
+The landing page for **Simple Design**: product design, Webflow, 3D and motion for startups building in the age of AI.
 
-Built on the Simple rebrand (the 4×6 diagonal-line mark and "Simple Design" lockup from the *Logo – Rebrand* Figma file, Sofia Pro, the Simple lime `#DBF130`) and the 2.0 vision moodboard (dark, glowing light, lit-edge bento cards).
+Visual language: a dark three-column grid with dashed guides and "+" markers, extra-black extended uppercase headlines, light skeuomorphic cards, pressable dark buttons with dot-matrix icons and mono chips. All of it carries Simple's own brand: the 4×6 diagonal-line mark from the *Logo – Rebrand* file and the Simple lime `#DBF130`.
 
-**The work comes first.** Right after the hero, *Selected work* shows four case studies as cards that stack like a deck as you scroll: scallopx.com (its real landing page scrolls inside a browser frame), the Scallop app, E Money Network's 3D landing page, and the Human Design Academy app. Our own products and experiments live further down in *From the lab*.
+**The work comes first.** Right after the hero and the client strip, *Selected work* shows scallopx.com (hover to scroll the full landing page), the Scallop app, E Money Network's 3D landing page (in progress) and the Human Design Academy app. Our own products live in *From the lab*.
 
-## The idea: chaos → simple
+## Sections
 
-The diagonal lines of the Simple logo are the signature. On load they start scattered and snap into perfect alignment. Wherever the cursor goes, everything aligns and lights up lime. Scroll away and a little chaos creeps back. In the closing call-to-action, hovering a button makes every line fall into place.
+Hero · clients · selected work + the lab · pitch card · how it works · what we do · benefits · logo object · pricing ticket · FAQ · call to action · manifesto and team · footer.
 
 ## Run it
 
@@ -20,40 +20,22 @@ npm run build    # outputs to /dist (static, deploy anywhere: Vercel, Netlify, G
 
 ## Stack
 
-- [Vite](https://vitejs.dev) — dev server and build, no framework
-- [GSAP](https://gsap.com) + ScrollTrigger — load sequence, pinned horizontal work gallery, scroll-scrubbed text and process beam
-- [Lenis](https://lenis.darkroom.engineering) — smooth scrolling
-- Raw WebGL — the spectral light behind the hero (`src/aurora.js`)
-- Canvas 2D — the line field (`src/lines.js`)
+- [Vite](https://vitejs.dev), no framework
+- [GSAP](https://gsap.com) + ScrollTrigger: hero intro, scroll reveals, small card animations
+- [Lenis](https://lenis.darkroom.engineering): smooth scrolling
+- Canvas 2D: the aligning line field around the glowing logo object (`src/lines.js`)
+- Fonts via Fontsource: Archivo (display), Outfit (body, Sofia Pro if installed), Geist Mono (labels)
 
-## Files
+## Editing
 
-| File | What it does |
-| --- | --- |
-| `index.html` | Page structure and static copy (hero, section headings, CTA, footer) |
-| `src/data.js` | **All editable content**: selected work (`featured`), lab projects (`work`), services, process, plans, team, FAQs, links, socials |
-| `src/main.js` | Renders content from `data.js` and runs all motion and interaction |
-| `src/lines.js` | The signature line field |
-| `src/aurora.js` | WebGL light beams behind the hero |
-| `src/art.js` | Generated project covers and team avatars |
-| `src/styles.css` | Design tokens and all styles |
-| `public/` | Favicon, logo mark, fonts, `work/` case-study images |
+- Copy and case studies: `src/data.js`
+- Section layout and static text: `index.html`
+- Rendering and motion: `src/main.js`
+- Styles and tokens: `src/styles.css`
+- Work images: `public/work/`
 
-## To finish before launch
+## To do
 
-- [ ] **Brand font**: add the Sofia Pro files to `public/fonts/` and add `url()` sources in `src/styles.css` (instructions at the top of the file). Until then, Outfit is used as a close stand-in.
-- [ ] **More case-study screens**: the Emoney 2.0 and Scallop App Figma files only exposed their cover frames, so each case shows one hero visual (`public/work/`). Add more screens and swap `image` in `featured` (`src/data.js`).
-- [ ] **HDA app**: shown as a coded mockup of a habit-tracker home screen (`hdaMock` in `src/main.js`). Replace with real screens from the HDA app Figma file (set `media: 'image'` and an `image` path).
-- [ ] **Case study details**: confirm the service tags and copy for each case in `featured`, and add live links where they exist.
-- [ ] **Lab covers**: lab projects use generated artwork. Drop screenshots into `public/work/` and set `image` on each item in `work`.
-- [ ] **Team photos**: avatars are generated monograms. Replace in `src/main.js` (`data-team` render) if you want real photos.
-- [ ] **Social links**: `socials` in `src/data.js` currently point to each network's home page.
-- [ ] **Client list**: `clients` in `src/data.js`; confirm these are teams you're happy to name.
-- [ ] **Privacy policy**: footer links to the Webflow site's privacy page.
-
-## Accessibility & performance
-
-- Respects `prefers-reduced-motion` (no smooth scroll, no load sequence, static line field).
-- Custom cursor only on fine pointers; touch devices get an auto-wandering light in the hero.
-- Canvases pause when off-screen; WebGL renders at half resolution.
-- Keyboard focus is visible everywhere; FAQ uses native `<details>`.
+- Replace the coded Human Design Academy mockup with real app screens.
+- Add more Emoney and Scallop screens as they're ready.
+- Point the social links in `src/data.js` at the real profiles.

@@ -3,219 +3,269 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Studio | Product Design, 3D &amp; Motion for AI Startups</title>
+    <title>Simple Design | Product Design, 3D &amp; Motion for AI Startups</title>
     <meta name="description" content="A whole design team for the price of one. UI/UX, Webflow, 3D and motion for startups building in the age of AI. Unlimited requests, pause or cancel anytime." />
-    <meta property="og:title" content="Simple Studio" />
+    <meta property="og:title" content="Simple Design" />
     <meta property="og:description" content="A whole design team for the price of one. Product design, Webflow, 3D and motion for AI startups." />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0f0f0f" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+    <!-- Column guides: the dashed grid the whole page sits on -->
+    <div class="guides" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
     <header class="nav" data-nav>
-      <a class="nav__logo" href="#top" aria-label="Simple Studio, back to top">
-        <svg class="mark" viewBox="-4 -4 184 258" aria-hidden="true"><defs><linearGradient id="nva" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".15"/><stop offset="1" stop-color="currentColor" stop-opacity=".8"/></linearGradient><linearGradient id="nvb" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#DBF130" stop-opacity=".3"/><stop offset="1" stop-color="#DBF130"/></linearGradient></defs><g stroke-width="9" stroke-linecap="round"><line x1="9" y1="24" x2="34" y2="0" stroke="url(#nva)"/><line x1="56" y1="24" x2="81" y2="0" stroke="url(#nva)"/><line x1="103" y1="24" x2="128" y2="0" stroke="url(#nva)"/><line x1="150" y1="24" x2="175" y2="0" stroke="url(#nva)"/><line x1="9" y1="67" x2="34" y2="43" stroke="url(#nva)"/><line x1="56" y1="67" x2="81" y2="43" stroke="url(#nva)"/><line x1="103" y1="67" x2="128" y2="43" stroke="url(#nva)"/><line x1="150" y1="67" x2="175" y2="43" stroke="url(#nva)"/><line x1="9" y1="110" x2="34" y2="86" stroke="url(#nva)"/><line x1="53" y1="113" x2="81" y2="86" stroke="url(#nvb)"/><line x1="100" y1="113" x2="128" y2="86" stroke="url(#nvb)"/><line x1="150" y1="110" x2="175" y2="86" stroke="url(#nva)"/><line x1="9" y1="153" x2="34" y2="129" stroke="url(#nva)"/><line x1="53" y1="156" x2="81" y2="129" stroke="url(#nvb)"/><line x1="100" y1="156" x2="128" y2="129" stroke="url(#nvb)"/><line x1="150" y1="153" x2="175" y2="129" stroke="url(#nva)"/><line x1="9" y1="196" x2="34" y2="172" stroke="url(#nva)"/><line x1="56" y1="196" x2="81" y2="172" stroke="url(#nva)"/><line x1="103" y1="196" x2="128" y2="172" stroke="url(#nva)"/><line x1="150" y1="196" x2="175" y2="172" stroke="url(#nva)"/><line x1="9" y1="239" x2="34" y2="215" stroke="url(#nva)"/><line x1="56" y1="239" x2="81" y2="215" stroke="url(#nva)"/><line x1="103" y1="239" x2="128" y2="215" stroke="url(#nva)"/><line x1="150" y1="239" x2="175" y2="215" stroke="url(#nva)"/></g></svg>
+      <a class="nav__logo" href="#top" aria-label="Simple Design, back to top">
+        <span data-mark="nav"></span>
         <span class="lockup">Simple<br />Design</span>
       </a>
       <nav class="nav__links" aria-label="Main">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#lab">Lab</a>
-        <a href="#process">Process</a>
+        <a href="#work">Our work</a>
+        <a href="#how">How it works</a>
+        <a href="#benefits">Benefits</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn--lime btn--sm magnetic" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener" data-cursor="Book">Book a call</a>
+      <a class="btn-light btn-light--nav" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener">
+        Book a call <span class="avatar-dot" data-mark="dot"></span>
+      </a>
       <button class="nav__menu" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span></button>
     </header>
 
     <div class="menu" id="mobile-menu" hidden>
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#lab">Lab</a>
-      <a href="#process">Process</a>
+      <a href="#work">Our work</a>
+      <a href="#how">How it works</a>
+      <a href="#benefits">Benefits</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn--lime" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener">Book a call</a>
+      <a class="btn-light" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener">Book a call</a>
     </div>
 
     <main id="main">
-      <!-- HERO ─ chaos becomes simple -->
-      <section class="hero" id="top">
-        <canvas class="hero__aurora" aria-hidden="true"></canvas>
-        <canvas class="hero__lines" aria-hidden="true"></canvas>
-        <div class="hero__vignette" aria-hidden="true"></div>
-
-        <div class="hero__inner">
-          <a class="chip" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener" data-hero-fade>
-            <span class="chip__dot"></span> Try unlimited requests free for the first 7 days
-          </a>
-
-          <h1 class="hero__title" aria-label="We are Simple.">
-            <span class="hero__line" aria-hidden="true"><span class="split">We are</span></span>
-            <span class="hero__line" aria-hidden="true">
-              <svg class="hero__mark" viewBox="-4 -4 184 258" aria-hidden="true"><defs><linearGradient id="hma" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity="0.55"/></linearGradient><linearGradient id="hmb" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#DBF130" stop-opacity=".1"/><stop offset="1" stop-color="#DBF130" stop-opacity="1"/></linearGradient></defs><g stroke-width="5" stroke-linecap="round"><line class="hm-line" x1="9" y1="24" x2="34" y2="0" stroke="url(#hma)"/><line class="hm-line" x1="56" y1="24" x2="81" y2="0" stroke="url(#hma)"/><line class="hm-line" x1="103" y1="24" x2="128" y2="0" stroke="url(#hma)"/><line class="hm-line" x1="150" y1="24" x2="175" y2="0" stroke="url(#hma)"/><line class="hm-line" x1="9" y1="67" x2="34" y2="43" stroke="url(#hma)"/><line class="hm-line" x1="56" y1="67" x2="81" y2="43" stroke="url(#hma)"/><line class="hm-line" x1="103" y1="67" x2="128" y2="43" stroke="url(#hma)"/><line class="hm-line" x1="150" y1="67" x2="175" y2="43" stroke="url(#hma)"/><line class="hm-line" x1="9" y1="110" x2="34" y2="86" stroke="url(#hma)"/><line class="hm-line" x1="53" y1="113" x2="81" y2="86" stroke="url(#hmb)"/><line class="hm-line" x1="100" y1="113" x2="128" y2="86" stroke="url(#hmb)"/><line class="hm-line" x1="150" y1="110" x2="175" y2="86" stroke="url(#hma)"/><line class="hm-line" x1="9" y1="153" x2="34" y2="129" stroke="url(#hma)"/><line class="hm-line" x1="53" y1="156" x2="81" y2="129" stroke="url(#hmb)"/><line class="hm-line" x1="100" y1="156" x2="128" y2="129" stroke="url(#hmb)"/><line class="hm-line" x1="150" y1="153" x2="175" y2="129" stroke="url(#hma)"/><line class="hm-line" x1="9" y1="196" x2="34" y2="172" stroke="url(#hma)"/><line class="hm-line" x1="56" y1="196" x2="81" y2="172" stroke="url(#hma)"/><line class="hm-line" x1="103" y1="196" x2="128" y2="172" stroke="url(#hma)"/><line class="hm-line" x1="150" y1="196" x2="175" y2="172" stroke="url(#hma)"/><line class="hm-line" x1="9" y1="239" x2="34" y2="215" stroke="url(#hma)"/><line class="hm-line" x1="56" y1="239" x2="81" y2="215" stroke="url(#hma)"/><line class="hm-line" x1="103" y1="239" x2="128" y2="215" stroke="url(#hma)"/><line class="hm-line" x1="150" y1="239" x2="175" y2="215" stroke="url(#hma)"/></g></svg><span class="split">Simple.</span>
-            </span>
+      <!-- HERO -->
+      <section class="hero frame" id="top">
+        <div class="hero__left">
+          <ul class="app-icons" aria-label="What we design" data-icons></ul>
+          <h1 class="hero__title" aria-label="Design that just works. Keep it simple.">
+            <span class="hl">Design <span class="hero__badge" data-mark="badge" aria-hidden="true"></span></span>
+            <span class="hl dim">That just works.</span>
+            <span class="hl dim">Keep it <span class="arrow" aria-hidden="true"></span> <span class="lit">Simple</span></span>
           </h1>
-
-          <div class="hero__foot">
-            <p class="hero__lede" data-hero-fade>
-              Hire a whole design team for the price of one. A product design studio for startups building in the age of AI.
-            </p>
-            <div class="hero__ctas" data-hero-fade>
-              <a class="btn btn--lime magnetic" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener" data-cursor="Book">Book a call</a>
-              <a class="btn btn--ghost magnetic" href="#work" data-cursor="Scroll">See the work</a>
-            </div>
+          <p class="hero__caption">All the design you need, in one subscription.</p>
+        </div>
+        <div class="hero__right">
+          <p class="hero__note">Finally, design that ships in days, not quarters.</p>
+          <div class="card-light hero__card">
+            <span class="chip-mono chip-mono--violet"><span class="dots" data-dots="grid"></span>Free for 7 days</span>
+            <p class="hero__pitch">A whole design team for the price of one. UI/UX, Webflow, 3D and motion. Unlimited requests. Pause or cancel anytime.</p>
+            <a class="btn-dark" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener"><span class="btn-dark__icon" data-dots="arrow"></span><span>Book a call</span></a>
           </div>
         </div>
-
-        <p class="hero__hint" data-hero-fade aria-hidden="true">Move your cursor. Watch it get simple.</p>
       </section>
+
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <!-- CLIENTS -->
       <section class="clients" aria-label="Teams we've worked with">
-        <p class="clients__label">Trusted by founders and teams at</p>
-        <div class="marquee" data-marquee>
-          <div class="marquee__track"></div>
+        <div class="marquee"><div class="marquee__track" data-marquee></div></div>
+      </section>
+
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <!-- WORK -->
+      <section class="work frame" id="work">
+        <header class="sec-head">
+          <h2 class="display">Selected work</h2>
+          <div class="chips"><span class="chip-mono"><span class="dots" data-dots="grid"></span>Live in the world</span><span class="chip-mono"><span class="dots" data-dots="star"></span>Top quality</span></div>
+        </header>
+
+        <div class="work__grid">
+          <div class="panel work__tiles" data-featured></div>
+
+          <aside class="work__side">
+            <div class="panel side-card">
+              <h3 class="bar-title"><span class="sq" data-dots="quote"></span><span class="bar bar--lime"></span>Websites, apps &amp; more</h3>
+              <p class="muted">We design whatever you need, from product UI and landing pages to brands, 3D and motion.</p>
+              <a class="btn-light btn-light--wide" href="#lab">See the lab <span class="ext" aria-hidden="true">↗</span></a>
+            </div>
+
+            <p class="side-label"><span class="spark" aria-hidden="true">✳</span> One studio for everything you ship.</p>
+            <ul class="chip-cloud" data-chipcloud></ul>
+
+            <div class="glow-card">
+              <p class="glow-card__title">“Design that just works.” That's it.</p>
+              <p class="muted">One subscription. One team. Every craft.</p>
+            </div>
+          </aside>
+        </div>
+
+        <div class="lab" id="lab">
+          <h3 class="bar-title bar-title--lg"><span class="sq" data-dots="flask"></span><span class="bar bar--violet"></span>From the lab</h3>
+          <p class="muted lab__sub">Our own products and experiments. Ideas we couldn't stop thinking about, so we built them.</p>
+          <div class="lab__track" data-lab></div>
         </div>
       </section>
 
-      <!-- SELECTED WORK — the main event -->
-      <section class="featured" id="work">
-        <header class="featured__head">
-          <h2 class="featured__title">Selected work</h2>
-          <p class="section__sub">Products we've designed for founders shipping fintech, education and 3D-first brands. Real work, live in the world.</p>
-        </header>
-        <div class="cases" data-featured></div>
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <!-- PITCH -->
+      <section class="pitch frame">
+        <div class="card-light pitch__card">
+          <div class="pitch__frame">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="app-glyph"><span data-mark="glyph"></span></div>
+          </div>
+          <p>Hiring is slow. Agencies are slower. With Simple, you get a whole design team for one flat monthly plan.</p>
+          <p>No contracts. No surprises. Pause or cancel anytime. Fast designs. Real results. Every time.</p>
+          <div class="pitch__foot"><span class="barcode" aria-hidden="true"></span><span class="spark" aria-hidden="true">✳</span></div>
+        </div>
       </section>
 
-      <!-- STATEMENT -->
-      <section class="statement">
-        <p class="statement__text" data-scrub-words>
-          Design that just works. That's it. One subscription gets you UI/UX, Webflow, 3D and motion, from one team that ships in days, not quarters.
-        </p>
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <!-- HOW IT WORKS -->
+      <section class="how frame" id="how">
+        <header class="sec-head sec-head--indent">
+          <h2 class="display"><span>How it</span><span class="indent">works</span></h2>
+          <p class="muted">Design as you know it is out the door. Design as you want it just arrived.</p>
+        </header>
+        <div class="steps3" data-steps></div>
+        <div class="center-cta"><a class="btn-dark" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener"><span class="btn-dark__icon" data-dots="arrow"></span><span>Book a call</span></a></div>
       </section>
+
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <!-- SERVICES -->
-      <section class="section services" id="services">
-        <header class="section__head">
-          <h2 class="h2">Simple services</h2>
-          <p class="section__sub">Three crafts under one roof, so your product, your story and your brand finally look like they came from the same place.</p>
+      <section class="services frame" id="services">
+        <header class="sec-head">
+          <h2 class="display">What we do</h2>
+          <p class="muted">Three crafts under one roof, so your product, your story and your brand look like they came from the same place.</p>
         </header>
-        <div class="bento" data-services></div>
+        <div class="grid3" data-services></div>
       </section>
 
-      <!-- LAB — products and experiments -->
-      <section class="work" id="lab">
-        <div class="work__pin">
-          <header class="work__head">
-            <h2 class="h2">From the lab</h2>
-            <p class="section__sub">Our own products and experiments. Ideas we couldn't stop thinking about, so we built them. Go ahead and play.</p>
-            <div class="work__progress" aria-hidden="true"><span></span></div>
-          </header>
-          <div class="work__track" data-work></div>
-        </div>
+      <!-- BENEFITS -->
+      <section class="benefits frame" id="benefits">
+        <header class="sec-head">
+          <h2 class="display">Benefits</h2>
+          <p class="muted">Perks so good, you won't need to go anywhere else. Seriously.</p>
+        </header>
+        <div class="grid3" data-benefits></div>
+        <div class="center-cta"><a class="btn-dark" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener"><span class="btn-dark__icon" data-dots="arrow"></span><span>Book a call</span></a></div>
       </section>
 
-      <!-- PROCESS -->
-      <section class="section process" id="process">
-        <div class="process__grid">
-          <header class="process__head">
-            <h2 class="h2">How we do it</h2>
-            <p class="section__sub">Here's how we take every project from idea to launch. Flawlessly.</p>
-            <a class="link-under" href="https://www.figma.com/proto/169BrrGqY3I61NtGmzjubi/Simple-Prototype?page-id=3%3A36&node-id=5%3A37&viewport=444%2C48%2C0.22&scaling=min-zoom&starting-point-node-id=5%3A37" target="_blank" rel="noopener">Click through our prototype</a>
-          </header>
-          <div class="steps-wrap">
-            <span class="steps__beam" aria-hidden="true"><span></span></span>
-            <ol class="steps" data-process></ol>
-          </div>
+      <!-- LOGO OBJECT -->
+      <section class="orb frame" aria-hidden="true">
+        <div class="orb__stage">
+          <canvas class="orb__lines"></canvas>
+          <div class="orb__ring"></div>
+          <div class="orb__mark" data-mark="orb"></div>
         </div>
       </section>
 
       <!-- PRICING -->
-      <section class="section pricing" id="pricing">
-        <header class="section__head">
-          <h2 class="h2">Let's get to the business</h2>
-          <p class="section__sub">Let's keep it simple, even the cha-ching. One plan covers your whole month of design. No contracts. Pause or cancel anytime.</p>
+      <section class="pricing frame" id="pricing">
+        <header class="sec-head sec-head--indent">
+          <h2 class="display"><span>Join the</span><span class="indent">plan</span></h2>
+          <p class="muted">Choose a plan that's right for you and your team.</p>
         </header>
-        <div class="plans" data-plans></div>
-        <div class="onboard">
-          <h3 class="h4">How do unlimited designs work?</h3>
-          <ol class="onboard__list" data-onboard></ol>
+        <div class="pricing__grid">
+          <div class="pricing__lead">
+            <p class="muted">One subscription. Infinite design. Priced to your scope, so you only pay for what you need.</p>
+          </div>
+          <div class="ticket card-light">
+            <span class="ticket__notch" aria-hidden="true"></span>
+            <div class="ticket__band">Simple Design</div>
+            <div class="ticket__price"><span>Let's talk</span><span class="chip-mono chip-mono--light">Pause or cancel anytime</span></div>
+            <div class="seg" role="tablist" aria-label="Plans" data-seg></div>
+            <ul class="ticket__list" data-ticket></ul>
+            <a class="btn-dark btn-dark--wide" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener"><span class="btn-dark__icon" data-dots="arrow"></span><span>Book a call</span></a>
+          </div>
+          <div class="pricing__side">
+            <div class="panel mini-card">
+              <h3 class="bar-title"><span class="sq" data-dots="pause"></span><span class="bar bar--violet"></span>Pause anytime</h3>
+              <p class="muted">Temporarily pause your subscription when work is quiet. Pick up where you left off.</p>
+            </div>
+            <div class="panel mini-card">
+              <h3 class="bar-title"><span class="sq" data-dots="seven"></span><span class="bar bar--lime"></span>Try it for a week</h3>
+              <p class="muted">Unlimited requests, free for the first 7 days.</p>
+            </div>
+            <div class="panel mini-card">
+              <h3 class="bar-title"><span class="sq" data-dots="code"></span><span class="bar bar--magenta"></span>Webflow builds</h3>
+              <p class="muted">We design it, then build it in Webflow, straight into your account.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- TEAM -->
-      <section class="section team">
-        <header class="section__head">
-          <h2 class="h2">The A-Team</h2>
-          <p class="section__sub">Five specialists, one brief. We pay for the pro tools so you don't have to.</p>
-        </header>
-        <ul class="team__grid" data-team></ul>
-      </section>
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
       <!-- FAQ -->
-      <section class="section faq" id="faq">
-        <div class="faq__grid">
-          <header class="faq__head">
-            <h2 class="h2">You've got questions</h2>
-            <p class="section__sub">We've got answers. Still unsure? Ask us anything on a call.</p>
-          </header>
-          <div class="faq__list" data-faq></div>
+      <section class="faq frame" id="faq">
+        <header class="sec-head">
+          <h2 class="display"><span>Frequently</span><span>asked questions</span></h2>
+          <div class="chips"><span class="chip-mono"><span class="dots" data-dots="check"></span>Everything you need to know</span></div>
+        </header>
+        <div class="faq__list" data-faq></div>
+      </section>
+
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <!-- CTA -->
+      <section class="cta frame" id="contact">
+        <div class="cta__copy">
+          <h2 class="display display--sm"><span>See if Simple</span><span>is right for you</span></h2>
+          <p class="muted">Book a quick call. We'll walk you through how it works, and redefine the way you get design done.</p>
+          <a class="btn-dark" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener"><span class="btn-dark__icon" data-dots="arrow"></span><span>Book a call</span></a>
+          <p class="muted cta__mail">Prefer email? <a href="mailto:hi@simplr.studio">hi@simplr.studio</a></p>
         </div>
       </section>
 
-      <!-- CTA -->
-      <section class="cta" id="contact">
-        <canvas class="cta__lines" aria-hidden="true"></canvas>
-        <div class="cta__inner">
-          <h2 class="cta__title">Let's start <br />the project</h2>
-          <p class="cta__sub">Got a very specific requirement? We're always looking for that diamond in the rough. Is that you?</p>
-          <div class="cta__actions">
-            <a class="btn btn--lime btn--lg magnetic" href="https://calendly.com/simplr-studio/30min" target="_blank" rel="noopener" data-cursor="Book" data-align>Schedule a call</a>
-            <a class="btn btn--ghost btn--lg magnetic" href="mailto:hi@simplr.studio" data-align>Introvert? Email us</a>
+      <div class="rule frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+      <!-- ABOUT -->
+      <section class="about frame">
+        <header class="sec-head">
+          <h2 class="display">About us</h2>
+          <p class="muted">A design team on demand. Fast, clean, and ready when you are.</p>
+        </header>
+        <div class="about__grid">
+          <div class="card-light manifesto">
+            <p class="manifesto__title" aria-hidden="true">Manifesto</p>
+            <p>We believe in a world where you never chase a freelancer again, never wait three weeks for a "quick mockup", and never ship a product that looks unfinished.</p>
+            <p>Design that just works. That's it. Simple to use, beautiful to look at, built to convert.</p>
+            <p>Got a very specific requirement? We're always looking for that diamond in the rough. Is that you?</p>
+            <div class="pitch__foot"><span class="tag-mono">Designing with love</span><span class="barcode" aria-hidden="true"></span><span class="spark" aria-hidden="true">✳</span></div>
+          </div>
+          <div class="panel team">
+            <div class="team__head"><h3 class="team__title">The team:</h3><span data-mark="team"></span></div>
+            <ul class="team__faces" data-faces></ul>
+            <dl class="team__table" data-team></dl>
+            <p class="side-label"><span class="spark" aria-hidden="true">✳</span> Specialties:</p>
+            <ul class="chips" data-skills></ul>
+            <a class="btn-light btn-light--wide" href="#work">View our work <span class="ext" aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="footer__top">
-        <div class="footer__col">
-          <p class="footer__label">Say hi</p>
-          <a class="footer__mail" href="mailto:hi@simplr.studio">hi@simplr.studio</a>
+    <footer class="footer frame">
+      <p class="footer__word" aria-hidden="true">simple</p>
+      <div class="footer__row">
+        <div>
+          <p>Made in Surat, Gujarat.</p>
+          <p class="muted">(Working with founders everywhere.)</p>
         </div>
-        <div class="footer__col">
-          <p class="footer__label">Follow</p>
-          <ul class="footer__socials" data-socials></ul>
+        <ul class="footer__links" data-socials></ul>
+        <div class="footer__meta">
+          <a href="https://www.youtube.com/watch?v=3WxrLCUxhd0" target="_blank" rel="noopener">Watch our reel</a>
+          <a href="https://simplrstudio.webflow.io/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
+          <span class="muted">© <span data-year></span> Simple Design</span>
         </div>
-        <div class="footer__col">
-          <p class="footer__label">More</p>
-          <a class="link-under" href="https://www.youtube.com/watch?v=3WxrLCUxhd0" target="_blank" rel="noopener">Watch our reel</a>
-          <a class="link-under" href="https://simplestudio.lemonsqueezy.com/checkout/buy/55c64bc5-dfdb-4999-af01-8de40566466f" target="_blank" rel="noopener">Download Botanica</a>
-        </div>
-      </div>
-      <div class="footer__word" aria-hidden="true">
-        <svg class="footer__mark" viewBox="-4 -4 184 258"><use href="#mark" /></svg>
-        <span>Simple</span>
-      </div>
-      <div class="footer__bottom">
-        <span>© <span data-year></span> Simple Studio. Made in Surat, for everywhere.</span>
-        <a href="https://simplrstudio.webflow.io/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
-        <a href="#top" class="footer__top-link">Back to top</a>
       </div>
     </footer>
-
-    <!-- Simple logo mark (from the Logo – Rebrand Figma file): 4×6 diagonal lines, centre four lit. -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <symbol id="mark" viewBox="-4 -4 184 258">
-        <defs><linearGradient id="mka" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity="0.5"/></linearGradient><linearGradient id="mkb" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".05"/><stop offset="1" stop-color="currentColor" stop-opacity="1"/></linearGradient></defs>
-        <g stroke-width="4" stroke-linecap="round"><line x1="9" y1="24" x2="34" y2="0" stroke="url(#mka)"/><line x1="56" y1="24" x2="81" y2="0" stroke="url(#mka)"/><line x1="103" y1="24" x2="128" y2="0" stroke="url(#mka)"/><line x1="150" y1="24" x2="175" y2="0" stroke="url(#mka)"/><line x1="9" y1="67" x2="34" y2="43" stroke="url(#mka)"/><line x1="56" y1="67" x2="81" y2="43" stroke="url(#mka)"/><line x1="103" y1="67" x2="128" y2="43" stroke="url(#mka)"/><line x1="150" y1="67" x2="175" y2="43" stroke="url(#mka)"/><line x1="9" y1="110" x2="34" y2="86" stroke="url(#mka)"/><line x1="53" y1="113" x2="81" y2="86" stroke="url(#mkb)"/><line x1="100" y1="113" x2="128" y2="86" stroke="url(#mkb)"/><line x1="150" y1="110" x2="175" y2="86" stroke="url(#mka)"/><line x1="9" y1="153" x2="34" y2="129" stroke="url(#mka)"/><line x1="53" y1="156" x2="81" y2="129" stroke="url(#mkb)"/><line x1="100" y1="156" x2="128" y2="129" stroke="url(#mkb)"/><line x1="150" y1="153" x2="175" y2="129" stroke="url(#mka)"/><line x1="9" y1="196" x2="34" y2="172" stroke="url(#mka)"/><line x1="56" y1="196" x2="81" y2="172" stroke="url(#mka)"/><line x1="103" y1="196" x2="128" y2="172" stroke="url(#mka)"/><line x1="150" y1="196" x2="175" y2="172" stroke="url(#mka)"/><line x1="9" y1="239" x2="34" y2="215" stroke="url(#mka)"/><line x1="56" y1="239" x2="81" y2="215" stroke="url(#mka)"/><line x1="103" y1="239" x2="128" y2="215" stroke="url(#mka)"/><line x1="150" y1="239" x2="175" y2="215" stroke="url(#mka)"/></g>
-      </symbol>
-    </svg>
 
     <script type="module" src="/src/main.js"></script>
   </body>
