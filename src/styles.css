@@ -304,6 +304,18 @@ main, .footer, .nav { position: relative; z-index: 1; }
 .lab-card { transition: box-shadow 0.4s; }
 .lab-card:hover { box-shadow: inset 0 0 0 1px rgba(219, 241, 48, 0.35), 0 30px 60px -30px rgba(0, 0, 0, 0.9); }
 
+/* Dot-matrix icons: boot up, idle wave, twinkle; march on hover */
+svg.dotfx circle { transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform 0.45s var(--ease); transition-delay: calc(var(--x) * 45ms + var(--y) * 70ms); }
+svg.dotfx.is-booted circle { transform: scale(1); }
+svg.is-booted circle.on { animation: dotwave 3.2s ease-in-out infinite; animation-delay: calc(var(--x) * 0.14s + var(--y) * 0.07s + 0.8s); }
+svg.is-booted circle.off { animation: dottwinkle 6s ease-in-out infinite; animation-delay: var(--t); }
+@keyframes dotwave { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes dottwinkle { 0%, 88%, 100% { opacity: 0.16; } 94% { opacity: 0.85; } }
+a:hover svg.is-booted circle.on, button:hover svg.is-booted circle.on, .panel:hover svg.is-booted circle.on { animation: dotmarch 0.7s steps(2, jump-none) infinite; animation-delay: calc(var(--x) * 0.09s); }
+a:hover svg.is-booted circle.off, button:hover svg.is-booted circle.off, .panel:hover svg.is-booted circle.off { animation: dotghost 0.7s ease-out infinite; animation-delay: calc(var(--x) * 0.09s); }
+@keyframes dotmarch { 0% { opacity: 1; } 100% { opacity: 0.25; } }
+@keyframes dotghost { 0% { opacity: 0.45; } 100% { opacity: 0.12; } }
+
 /* Hover polish */
 .tile { transition: box-shadow 0.4s; }
 .tile:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 30px 60px -30px rgba(0, 0, 0, 0.9); }

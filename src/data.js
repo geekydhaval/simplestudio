@@ -92,7 +92,7 @@ export const featured = [
     body: 'A landing page and a 3D world for E Money Network. Glass, glow and money moving through a living network, so the product is understood before a single word is read.',
     services: ['Landing page', '3D design', 'Motion'],
     status: 'In progress',
-    url: 'https://www.figma.com/design/ltm5WnO8DSNA25mrOkxKUL/Emoney-2.0?node-id=1-258',
+    url: 'https://www.figma.com/proto/ltm5WnO8DSNA25mrOkxKUL/Emoney-2.0?node-id=1-258&viewport=3061%2C3684%2C0.77&scaling=min-zoom&content-scaling=fixed&page-id=1%3A2',
     linkLabel: 'View the presentation',
     cta: true,
     layout: 'wide',

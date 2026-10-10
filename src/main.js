@@ -79,7 +79,9 @@ function dotsSvg(kind) {
   const w = map[0].length, h = map.length;
   let d = '';
   map.forEach((row, y) => [...row].forEach((ch, x) => {
-    d += `<circle cx="${x * 4 + 2}" cy="${y * 4 + 2}" r="1.35" fill="currentColor" opacity="${ch === '#' ? 1 : 0.16}"/>`;
+    const on = ch === '#';
+    // --x/--y drive the wave and the boot-up stagger; --t gives unlit dots a random twinkle offset
+    d += `<circle class="${on ? 'on' : 'off'}" style="--x:${x};--y:${y};--t:${(Math.random() * 6).toFixed(2)}s" cx="${x * 4 + 2}" cy="${y * 4 + 2}" r="1.35" fill="currentColor" opacity="${on ? 1 : 0.16}"/>`;
   }));
   return `<svg viewBox="0 0 ${w * 4} ${h * 4}" aria-hidden="true">${d}</svg>`;
 }
@@ -471,6 +473,18 @@ if (!reduced) {
         c.style.setProperty('--my', `${e.clientY - r.top}px`);
       })
     );
+  }
+}
+
+// Dot-matrix icons boot up dot by dot when they come into view, then idle with a slow wave
+{
+  const icons = () => $$('svg').filter((sv) => sv.querySelector('circle.on'));
+  if (reduced || !('IntersectionObserver' in window)) icons().forEach((sv) => sv.classList.add('is-booted'));
+  else {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-booted'); io.unobserve(e.target); }
+    }), { threshold: 0.6 });
+    icons().forEach((sv) => { sv.classList.add('dotfx'); io.observe(sv); });
   }
 }
 
