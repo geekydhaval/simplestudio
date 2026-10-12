@@ -21,41 +21,36 @@ const fill = (sel, html) => { const el = $(sel); if (el) el.innerHTML = html; re
 const check = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 /* ─────────────────────────────────────────────────────────
-   The Simple mark, generated from the rebrand geometry.
-   4×6 diagonal lines; the centre four are longer and brighter.
+   The Simple Studio logo: a ring (heavier at the bottom) with two
+   swooshes crossing it. The disc inside is cut out, so whatever sits
+   behind the logo shows through.
    ───────────────────────────────────────────────────────── */
 
 let markId = 0;
-function markSvg({ color = '#ffffff', centre = '#dbf130', alpha = 0.5, centreAlpha = 1, stroke = 8, cls = '' } = {}) {
+const LOGO = {
+  ring: 'M252.239 445.007C375.124 445.007 474.743 345.389 474.743 222.503C474.743 99.6181 375.124 0 252.239 0C129.353 0 29.7351 99.6181 29.7351 222.503C29.7351 345.389 129.353 445.007 252.239 445.007Z',
+  disc: 'M252.239 410.982C358.387 410.982 444.437 324.933 444.437 218.785C444.437 112.637 358.387 26.5872 252.239 26.5872C146.091 26.5872 60.0408 112.637 60.0408 218.785C60.0408 324.933 146.091 410.982 252.239 410.982Z',
+  swooshA: 'M469.5 268.982L460.303 264.367L450.975 259.622C398.962 234.335 344.597 214.499 288.767 200.426C280.557 198.356 279.117 187.495 286.868 184.089C333.01 163.816 384.72 158.007 435.221 167.744C438.607 168.185 441.969 168.827 445.289 169.664C448.644 170.219 452.002 171.031 455.359 171.842C464.407 203.541 469.163 236.215 469.5 268.982Z',
+  swooshB: 'M230.033 249.95C235.521 251.275 236.528 258.563 231.438 261.003C183.462 284.002 128.926 291.054 75.7179 280.892C72.2846 280.433 68.8799 279.75 65.5258 278.847C62.1727 278.295 58.8168 277.485 55.7184 276.678C46.6349 244.962 41.8519 212.261 41.4992 179.46C44.4731 181.175 47.5422 182.714 50.6903 184.069C53.7492 185.869 56.9049 187.494 60.1418 188.937C114.533 215.362 171.503 235.817 230.033 249.95Z',
+};
+function markSvg({ color = '#ffffff', accent = color, opacity = 1, cls = '' } = {}) {
   const id = `mk${++markId}`;
-  let lines = '';
-  for (let r = 0; r < 6; r++) {
-    for (let c = 0; c < 4; c++) {
-      const mid = (c === 1 || c === 2) && (r === 2 || r === 3);
-      const x2 = 34 + 47 * c, y2 = 43 * r;
-      const x1 = mid ? 53 + 47 * (c - 1) : 9 + 47 * c;
-      const y1 = y2 + (mid ? 27 : 24);
-      lines += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="url(#${id}${mid ? 'c' : 'n'})"/>`;
-    }
-  }
-  return `<svg class="mark ${cls}" viewBox="-4 -4 184 258" fill="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="${id}n" x1="0" y1="1" x2="1" y2="0"><stop stop-color="${color}" stop-opacity="${alpha * 0.25}"/><stop offset="1" stop-color="${color}" stop-opacity="${alpha}"/></linearGradient>
-      <linearGradient id="${id}c" x1="0" y1="1" x2="1" y2="0"><stop stop-color="${centre}" stop-opacity="${centreAlpha * 0.55}"/><stop offset="1" stop-color="${centre}" stop-opacity="${centreAlpha}"/></linearGradient>
-    </defs>
-    <g stroke-width="${stroke}" stroke-linecap="round">${lines}</g></svg>`;
+  return `<svg class="mark ${cls}" viewBox="0 0 511 445" fill="none" aria-hidden="true" style="opacity:${opacity}">
+    <defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="511" height="445"><rect width="511" height="445" fill="#fff"/><path d="${LOGO.disc}" fill="#000"/></mask></defs>
+    <path class="mark__ring" d="${LOGO.ring}" fill="${color}" mask="url(#${id})"/>
+    <g class="mark__swoosh" fill="${accent}"><path d="${LOGO.swooshA}"/><path d="${LOGO.swooshB}"/></g></svg>`;
 }
 
 const markPresets = {
-  nav: { alpha: 0.85, stroke: 10 },
-  dot: { color: '#ffffff', alpha: 0.6, stroke: 12 },
-  badge: { color: '#1b1f00', centre: '#1b1f00', alpha: 0.55, centreAlpha: 1, stroke: 12 },
-  glyph: { color: '#1b1f00', centre: '#1b1f00', alpha: 0.5, centreAlpha: 1, stroke: 11 },
-  orb: { color: '#ffffff', alpha: 0.7, stroke: 7 },
-  team: { alpha: 0.7, stroke: 10 },
-  benefit: { alpha: 0.6, stroke: 8 },
-  medal: { color: '#1b1f00', centre: '#1b1f00', alpha: 0.5, stroke: 13 },
-  req: { alpha: 0.7, stroke: 11 },
+  nav: {},
+  dot: {},
+  badge: { color: '#1b1f00' },
+  glyph: { color: '#1b1f00' },
+  orb: {},
+  team: { opacity: 0.8 },
+  benefit: { accent: '#dbf130' },
+  medal: { color: '#1b1f00' },
+  req: {},
 };
 const mark = (preset) => markSvg(markPresets[preset]);
 
@@ -356,7 +351,6 @@ fill('[data-lab]', work.map((p) => {
       <div class="feat__vis">${x.v}</div>
       <div class="feat__head"><h3 class="feat__title">${esc(x.t)}</h3><p class="muted">${esc(x.b)}</p></div>
     </article>`).join(''));
-  $$('.b-mark line').forEach((l, i) => l.style.setProperty('--i', i));
   $$('.b-stars > svg').forEach((st, i) => st.style.setProperty('--i', i));
   const tog = $('.b-toggle');
   tog?.addEventListener('click', () => {

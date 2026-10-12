@@ -3,7 +3,7 @@
 Guidance for Claude Code when working in this repo.
 
 ## What this is
-Simple Design's landing page. Vanilla JS + Vite, GSAP/ScrollTrigger, Lenis, Canvas 2D. No framework. Keep it that way unless asked.
+Simple Studio's landing page. Vanilla JS + Vite, GSAP/ScrollTrigger, Lenis, Canvas 2D. No framework. Keep it that way unless asked.
 Visual language: a three-column grid with dashed guides and "+" rule markers, extra-black extended uppercase headlines (second lines dimmed), light skeuomorphic cards, pressable dark buttons with dot-matrix icons, Geist Mono chips.
 
 ## Commands
@@ -34,7 +34,8 @@ Visual language: a three-column grid with dashed guides and "+" rule markers, ex
 - Always respect `prefers-reduced-motion`. Test at 390px wide; no horizontal page scroll (grids use `minmax(0, 1fr)`; long display words must fit).
 
 ## Brand
-- Logo mark = 4×6 grid of diagonal lines with gradient strokes; the centre four are brighter and longer. Geometry: col x = 9+47c → 34+47c, row y = 43r+24 → 43r (viewBox -4 -4 184 258); centre four start at x = 53+47(c−1), y = 43r+27. Lockup text: "Simple / Design".
+- Logo = a ring (heavier at the bottom, viewBox 0 0 511 445) with two swooshes crossing it; the inner disc is cut out with a mask so the background shows through. Paths live in `LOGO` in `src/main.js`; `markSvg({ color, accent, opacity })` draws it. Standalone files: `public/logo-mark.svg`, `public/favicon.svg`.
+- Name: "Simple Studio" (lockup "Simple / Studio"). Never "Simple Design".
 
 ## Gotchas
 - Don't put CSS `transition` on `transform` for elements GSAP animates. The nav hides with a CSS class (`.is-hidden`) and is never animated by GSAP.

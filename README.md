@@ -1,6 +1,6 @@
-# Simple Design — landing page
+# Simple Studio — landing page
 
-The landing page for **Simple Design**: product design, Webflow, 3D and motion for startups building in the age of AI.
+The landing page for **Simple Studio**: product design, Webflow, 3D and motion for startups building in the age of AI.
 
 Visual language: a dark three-column grid with dashed guides and "+" markers, extra-black extended uppercase headlines, light skeuomorphic cards, pressable dark buttons with dot-matrix icons and mono chips. All of it carries Simple's own brand: the 4×6 diagonal-line mark from the *Logo – Rebrand* file and the Simple lime `#DBF130`.
 
